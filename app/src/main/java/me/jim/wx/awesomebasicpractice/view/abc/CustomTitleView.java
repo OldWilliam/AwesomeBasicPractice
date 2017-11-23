@@ -12,6 +12,8 @@ import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by wx on 2017/11/23.
+ *
+ * 简单的显示文字
  */
 
 public class CustomTitleView extends View {
