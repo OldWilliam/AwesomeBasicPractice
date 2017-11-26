@@ -12,6 +12,41 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.view.abc.CustomViewGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:background="#FF12"
+                android:gravity="center"
+                android:text="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:text="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="160dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:background="#667"
+                android:gravity="center"
+                android:text="3" />
+
+        </me.jim.wx.awesomebasicpractice.view.abc.CustomViewGroup>
+
         <me.jim.wx.awesomebasicpractice.view.abc.CustomVoiceAdjust
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
