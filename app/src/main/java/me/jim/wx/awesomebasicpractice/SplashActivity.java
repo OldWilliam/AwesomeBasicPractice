@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
-public class MainActivity extends Activity {
+public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_splash);
         testFlowLayout();
     }
 

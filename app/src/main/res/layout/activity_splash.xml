@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    tools:context="me.jim.wx.awesomebasicpractice.MainActivity">
+    tools:context="me.jim.wx.awesomebasicpractice.SplashActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
