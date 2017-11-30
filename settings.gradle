@@ -1,2 +1,2 @@
 include ':app'
-include ':javalib'
+rootProject.name = 'AwesomeBasicPractice'
