@@ -1,14 +1,14 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
-        
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,4 +24,40 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+/**
+ * 直接使用adb找不到命令，即使环境变量正确；
+ * 可以用绝对路径；
+ * 最终的解决方案：https://stackoverflow.com/questions/21288448/how-to-retrieve-path-to-adb-in-build-gradle/26771087
+ */
+task forceInstallDebug(type: Exec) {
+    dependsOn ':app:assembleDebug'
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
+    if (localProperties.exists()) {
+        java.util.Properties properties = new Properties()
+        localProperties.withInputStream {
+            instr -> properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        def adb = "$sdkDir/platform-tools/adb"
+        commandLine "$adb", 'install', '-r', rootDir.toString().concat('/app/build/outputs/apk/debug/app-debug.apk').toString()
+    }
+}
+
+task startApp(type: Exec){
+    dependsOn 'forceInstallDebug'
+    def rootDir = project.rootDir
+    def localProperties = new File(rootDir, "local.properties")
+    if (localProperties.exists()) {
+        java.util.Properties properties = new Properties()
+        localProperties.withInputStream {
+            instr -> properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        def adb = "$sdkDir/platform-tools/adb"
+        def launcherActivity = 'me.jim.wx.awesomebasicpractice/.SplashActivity'
+        commandLine "$adb", 'shell', 'am', 'start', '-n', "$launcherActivity"
+    }
 }
