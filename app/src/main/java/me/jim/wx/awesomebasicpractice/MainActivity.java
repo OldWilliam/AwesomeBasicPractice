@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, CustomViewFragment.newInstance())
+                .replace(R.id.container, RxJavaFragment.newInstance())
                 .commit();
     }
 
