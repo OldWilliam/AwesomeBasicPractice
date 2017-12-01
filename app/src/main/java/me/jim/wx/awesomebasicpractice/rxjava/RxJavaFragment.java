@@ -78,5 +78,8 @@ public class RxJavaFragment extends Fragment {
                         Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        LessonTwo.ins().caseFive();
+        LessonTwo.ins().caseSix();
     }
 }

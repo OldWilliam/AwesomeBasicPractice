@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LessonTwo {
     private static final LessonTwo ourInstance = new LessonTwo();
-    private static final String TAG = "LessonTwo";
+    private static String TAG = "LessonTwo";
 
     public static LessonTwo ins() {
         return ourInstance;
@@ -76,9 +76,20 @@ public class LessonTwo {
             }
         };
 
-        observable.subscribeOn(Schedulers.computation())
+        observable
+                //有用，使得上游被观察者在computation线程，也使得后续的直到observeOn的流操作都是在computation线程
+                .subscribeOn(Schedulers.computation())
+                //没用，对上下都没有影响
                 .subscribeOn(Schedulers.newThread())
+                //在computation线程，不受上面的subscribeOn影响，但受第一个subscribeOn
+                .doOnNext(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.d(TAG, "accept: Between subscribeOn and observableOn " + Thread.currentThread().getName());
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
+                //在mainThread
                 .doOnNext(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
@@ -86,12 +97,14 @@ public class LessonTwo {
                     }
                 })
                 .observeOn(Schedulers.newThread())
+                //在newThread
                 .doOnNext(new Consumer<Integer>() {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         Log.d(TAG, "accept: After observeOn newThread " + Thread.currentThread().getName());
                     }
                 })
+                //消费者在newThread
                 .subscribe(consumer);
     }
 
@@ -121,7 +134,7 @@ public class LessonTwo {
     }
 
     /**
-     * 需要直接在工作线程的操作
+     * 需要直接在工作线程的操作，只起到切换线程的作用
      */
     public Observable<String> caseFour() {
         return readFile();
@@ -141,6 +154,52 @@ public class LessonTwo {
     private String internalReadFile() throws InterruptedException {
         Thread.sleep(10000);
         return "Read File Success!";
+    }
+
+    /**
+     * 只有subscribeOn,会影响之前和之后的
+     */
+    public void caseFive() {
+        Observable
+                //在ioThread
+                .create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                        Log.d("five", "subscribe: Observable thread is " + Thread.currentThread().getName());
+                        e.onNext(new Object());
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                //在ioThread
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Log.d("five", "accept: Consumer thread is " + Thread.currentThread().getName());
+                    }
+                });
+    }
+
+    /**
+     * 只有observeOn，只会影响之后的
+     */
+    public void caseSix() {
+        Observable
+                //在mainThread
+                .create(new ObservableOnSubscribe<Object>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Object> e) throws Exception {
+                        Log.d("six", "subscribe: Observable thread is " + Thread.currentThread().getName());
+                        e.onNext(new Object());
+                    }
+                })
+                .observeOn(Schedulers.io())
+                //在ioThread
+                .subscribe(new Consumer<Object>() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+                        Log.d("six", "accept: Consumer thread is " + Thread.currentThread().getName());
+                    }
+                });
     }
 }
 
