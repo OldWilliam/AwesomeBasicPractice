@@ -1,11 +1,10 @@
 package me.jim.wx.awesomebasicpractice.view.abc;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by wx on 2017/11/26.
