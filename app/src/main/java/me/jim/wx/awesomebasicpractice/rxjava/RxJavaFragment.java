@@ -10,13 +10,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.rxjava.abc.Api;
-import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonOne;
+import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonThree;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonTwo;
 
 /**
@@ -46,30 +43,13 @@ public class RxJavaFragment extends Fragment {
     }
 
     private void main() {
-        LessonOne.ins().caseOne();
+        LessonThree.ins().caseFive();
+        LessonThree.ins().caseFour();
+        LessonThree.ins().caseThree();
+        LessonThree.ins().caseTwo().subscribe();
+        LessonThree.ins().caseOne().subscribe();
         LessonTwo.ins().caseOne();
         LessonTwo.ins().caseTwo();
-//        LessonTwo.ins().caseThree().subscribe(new Observer<Api.LoginResponse>() {
-//            @Override
-//            public void onSubscribe(Disposable d) {
-//
-//            }
-//
-//            @Override
-//            public void onNext(Api.LoginResponse loginResponse) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Throwable e) {
-//                Toast.makeText(getContext(), "Login Fail!", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onComplete() {
-//                Toast.makeText(getContext(), "Login Success!", Toast.LENGTH_SHORT).show();
-//            }
-//        });
         LessonTwo.ins().caseFour()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
