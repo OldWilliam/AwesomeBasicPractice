@@ -43,6 +43,8 @@ public class RxJavaFragment extends Fragment {
     }
 
     private void main() {
+        LessonThree.ins().caseSeven();
+        LessonThree.ins().caseSix();
         LessonThree.ins().caseFive();
         LessonThree.ins().caseFour();
         LessonThree.ins().caseThree();

@@ -5,7 +5,11 @@ import android.util.Log;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -24,6 +28,59 @@ public class LessonThree {
     }
 
     private LessonThree() {
+    }
+
+    /**
+     * retry、retryUtil、retryWhen
+     * 在onError事件后调用
+     */
+    public void caseSeven() {
+        Observable
+                .create(new ObservableOnSubscribe<Integer>() {
+                    @Override
+                    public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                        e.onNext(1);
+                        e.onNext(2);
+                        e.onError(new NullPointerException());
+                    }
+                })
+                .retry(3)
+                .subscribe(new Observer<Integer>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        Log.d(TAG, "onNext: Operation retry result: "+integer.toString());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d(TAG, "onError: Operation retry onError!");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    /**
+     * repeat、repeatUtil、repeatWhen
+     * 在onCompleted事件后调用
+     */
+    public void caseSix() {
+        Observable.just(421)
+                .repeat(3)
+                .subscribe(new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        Log.d(TAG, "accept: Operation repeat result: " + integer.toString());
+                    }
+                });
     }
 
     /**
