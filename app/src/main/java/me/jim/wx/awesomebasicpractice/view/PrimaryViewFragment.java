@@ -14,10 +14,10 @@ import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 /**
  * 自定义View练习
  */
-public class CustomViewFragment extends Fragment {
+public class PrimaryViewFragment extends Fragment {
 
     public static Fragment newInstance() {
-        return new CustomViewFragment();
+        return new PrimaryViewFragment();
     }
 
     @Override

@@ -18,6 +18,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by wx on 2017/12/1.
+ *
+ * 线程切换
  */
 
 public class LessonTwo {
