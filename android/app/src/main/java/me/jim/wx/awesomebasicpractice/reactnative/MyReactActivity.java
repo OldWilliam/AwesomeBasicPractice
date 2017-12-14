@@ -16,6 +16,7 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 
 import me.jim.wx.awesomebasicpractice.BuildConfig;
+import me.jim.wx.awesomebasicpractice.reactnative.nativemodule.MyReactPackage;
 
 /**
  * Created by wx on 2017/12/13.
@@ -38,11 +39,13 @@ public class MyReactActivity extends AppCompatActivity implements DefaultHardwar
                 .setBundleAssetName("index.bundle")
                 .setJSMainModulePath("index")
                 .addPackage(new MainReactPackage())
+                //添加模块
+                .addPackage(new MyReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
 
-        // 注意这里的MyReactNativeApp必须对应“index.android.js”中的
+        // 注意这里的MyReactNativeApp必须对应“index.js”中的
         // “AppRegistry.registerComponent()”的第一个参数
         mReactRootView.startReactApplication(mReactInstanceManager, "my-react-native-app", null);
         setContentView(mReactRootView);
