@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.AdvancedViewFragment;
+import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -46,7 +47,7 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, AdvancedViewFragment.newInstance(null, null))
+                .replace(R.id.container, PrimaryViewFragment.newInstance())
                 .commit();
     }
 

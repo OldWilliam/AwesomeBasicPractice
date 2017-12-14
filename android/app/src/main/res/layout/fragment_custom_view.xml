@@ -11,6 +11,11 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.view.primary.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/login_default_1" />
+
         <me.jim.wx.awesomebasicpractice.view.primary.FlowLayout
             android:id="@+id/flow_layout"
             android:layout_width="250dp"
