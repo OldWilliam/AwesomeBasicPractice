@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
@@ -23,16 +24,16 @@ import android.util.AttributeSet;
  * android.support.v4.widget.CircleImageView
  */
 
-public class CircleImageView extends android.support.v7.widget.AppCompatImageView {
-    public CircleImageView(Context context) {
+public class HexagonImageView extends android.support.v7.widget.AppCompatImageView {
+    public HexagonImageView(Context context) {
         super(context);
     }
 
-    public CircleImageView(Context context, @Nullable AttributeSet attrs) {
+    public HexagonImageView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CircleImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public HexagonImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -77,23 +78,43 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
         Bitmap output = Bitmap.createBitmap(sbmp.getWidth(), sbmp.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);// TODO: 2017/12/14  创建和Bitmap一样大的Canvas？
         final Paint paint = createPaint();
+        final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
 
         /**
          * 背景图
          */
         canvas.drawARGB(0, 0, 0, 0);
-        canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f,
-                sbmp.getHeight() / 2 + 0.7f,
-                sbmp.getWidth() / 2 + 0.1f,
-                paint);
-
+        //圆形背景
+        //        canvas.drawCircle(sbmp.getWidth() / 2 + 0.7f,
+        //                sbmp.getHeight() / 2 + 0.7f,
+        //                sbmp.getWidth() / 2 + 0.1f,
+        //                paint);
+        /**
+         * 0,radius/4
+         * radius/4,0
+         * radius/4*3,0
+         * radius,radius/4
+         * radius,radius/4*3
+         * radius/4*3,radius
+         * radius/4,radius
+         * 0,radius/4*3
+         */
+        Path path = new Path();
+        path.lineTo(0, radius / 4);
+        path.lineTo(radius / 4, 0);
+        path.lineTo(radius / 4 * 3, 0);
+        path.lineTo(radius, radius / 4);
+        path.lineTo(radius, radius / 4 * 3);
+        path.lineTo(radius / 4 * 3, radius);
+        path.lineTo(radius / 4, radius);
+        path.lineTo(0, radius / 4 * 3);
+        canvas.drawPath(path, paint);
         //核心部分，设置两张图片的相交模式，在这里就是上面绘制的Circle和下面绘制的Bitmap,使前景图和和背景图相交
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));// TODO: 2017/12/14
 
         /**
          * 前景图
          */
-        final Rect rect = new Rect(0, 0, sbmp.getWidth(), sbmp.getHeight());
         canvas.drawBitmap(sbmp, rect, rect, paint);
         return output;
     }

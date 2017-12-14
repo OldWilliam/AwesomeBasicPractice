@@ -11,9 +11,10 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
-        <me.jim.wx.awesomebasicpractice.view.primary.CircleImageView
+        <me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
             android:src="@drawable/login_default_1" />
 
         <me.jim.wx.awesomebasicpractice.view.primary.FlowLayout
