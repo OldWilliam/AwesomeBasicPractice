@@ -1,4 +1,5 @@
-import React from 'react';
+'use strict';
+import React, { Component, PropTypes }from 'react';
 import {
   AppRegistry,
   StyleSheet,
@@ -8,7 +9,7 @@ import {
 } from 'react-native';
 
 import MyNativeModule from './MyNativeModule';
-
+import HexagonImageView from './HexagonImageView';
 
 class HelloWorld extends React.Component {
 
@@ -30,6 +31,7 @@ class HelloWorld extends React.Component {
         <TouchableOpacity onPress={this.showToast}>
           <Text style={styles.hello}>ShowToast</Text>
         </TouchableOpacity>
+        <HexagonImageView style={{flex:1,width:'100%'}}/>
       </View>
     )
   }

@@ -9,10 +9,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import me.jim.wx.awesomebasicpractice.reactnative.nativeui.ReactCustomImageManager;
+
 /**
  * Created by wx on 2017/12/14.
  *
- * 注册原生模块
+ * 注册原生模块、注册原生view
  */
 
 public class MyReactPackage implements ReactPackage {
@@ -25,6 +27,8 @@ public class MyReactPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+        List<ViewManager> views = new ArrayList<>();
+        views.add(new ReactCustomImageManager());
+        return views;
     }
 }
