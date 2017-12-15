@@ -3,6 +3,9 @@ package me.jim.wx.awesomebasicpractice.reactnative.nativeui;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
@@ -15,6 +18,9 @@ import java.io.InputStream;
 
 import javax.annotation.Nullable;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
 import okhttp3.Call;
@@ -39,7 +45,10 @@ import okhttp3.Response;
  * SimpleViewManager为ViewManager的子类，它自己好友更多派生类
  */
 public class ReactCustomImageManager extends SimpleViewManager<HexagonImageView> {
+    private static final String TAG = "ReactCustomImageManager";
     private static final String REACT_CLASS = "RCTHexagonImageView";
+
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public String getName() {
@@ -52,8 +61,8 @@ public class ReactCustomImageManager extends SimpleViewManager<HexagonImageView>
     @Override
     protected HexagonImageView createViewInstance(ThemedReactContext reactContext) {
         HexagonImageView view = new HexagonImageView(reactContext);
-        Bitmap bmp = BitmapFactory.decodeResource(reactContext.getResources(), R.drawable.login_default_1);
-        view.setImageDrawable(new BitmapDrawable(bmp));
+//        Bitmap bmp = BitmapFactory.decodeResource(reactContext.getResources(), R.drawable.login_default_1);
+//        view.setImageDrawable(new BitmapDrawable(bmp));
         return view;
     }
 
@@ -77,25 +86,32 @@ public class ReactCustomImageManager extends SimpleViewManager<HexagonImageView>
      * 4、方法返回值必须为void
      * 5、访问控制必须为public
      */
-//    @ReactProp(name = "srcUrl")
-//    public void setSrc(final HexagonImageView view, @Nullable String src) {
-//        OkHttpClient mClient = new OkHttpClient();
-//        final Request request = new Request.Builder()
-//                .url(src)
-//                .build();
-//        Call call = mClient.newCall(request);
-//        call.enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                InputStream is = response.body().byteStream();
-//                Bitmap bitmap = BitmapFactory.decodeStream(is);
-//                view.setImageBitmap(bitmap);
-//            }
-//        });
-//    }
+    @ReactProp(name = "srcUrl")
+    public void setSrc(final HexagonImageView view, @Nullable String src) {
+        Log.d(TAG, src);
+        OkHttpClient mClient = new OkHttpClient();
+        final Request request = new Request.Builder()
+                .url(src)
+                .build();
+        Call call = mClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                Log.d(TAG, "onResponse: ");
+                InputStream is = response.body().byteStream();
+                final Bitmap bitmap = BitmapFactory.decodeStream(is);
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
+    }
 }

@@ -31,7 +31,7 @@ class HelloWorld extends React.Component {
         <TouchableOpacity onPress={this.showToast}>
           <Text style={styles.hello}>ShowToast</Text>
         </TouchableOpacity>
-        <HexagonImageView style={{flex:1,width:'100%'}}/>
+        <HexagonImageView style={{flex:1,width:'100%'}} srcUrl = 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=740337262,1139965970&fm=27&gp=0.jpg'/>
       </View>
     )
   }
