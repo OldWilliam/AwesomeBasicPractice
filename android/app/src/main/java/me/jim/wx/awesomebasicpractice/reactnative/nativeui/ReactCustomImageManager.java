@@ -2,13 +2,10 @@ package me.jim.wx.awesomebasicpractice.reactnative.nativeui;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -18,10 +15,6 @@ import java.io.InputStream;
 
 import javax.annotation.Nullable;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
-import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
 import okhttp3.Call;
 import okhttp3.Callback;
