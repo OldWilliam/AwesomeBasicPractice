@@ -1,5 +1,6 @@
 'use strict';
 import React, { Component, PropTypes }from 'react';
+import {DeviceEventEmitter} from 'react-native'
 import {
   AppRegistry,
   StyleSheet,
@@ -13,6 +14,13 @@ import HexagonImageView from './HexagonImageView';
 
 class HelloWorld extends React.Component {
 
+  componentWillMount(){
+    console.log("componentWillMount");
+    //接收native的事件
+    DeviceEventEmitter.addListener(MyNativeModule.TestEvent, info => {
+      console.log(info);
+    })
+  }
   //js跳转Activity
   jumpActivity(){
     console.log("MODULE_NAME: ", MyNativeModule.NATIVE_MODULE_NAME);
