@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.AdvancedViewFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
+import me.jim.wx.awesomebasicpractice.view.RecyclerViewFragment;
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -46,9 +47,15 @@ public class MainActivity extends FragmentActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PrimaryViewFragment.newInstance())
-                .commit();
+        if (position == 0) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, RecyclerViewFragment.newInstance())
+                    .commit();
+        } else if (position == 1) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, PrimaryViewFragment.newInstance())
+                    .commit();
+        }
     }
 
     public void onSectionAttached(int number) {

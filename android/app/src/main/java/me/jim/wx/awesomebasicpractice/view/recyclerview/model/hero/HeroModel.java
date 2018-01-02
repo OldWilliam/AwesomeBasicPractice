@@ -27,7 +27,7 @@ import okhttp3.Response;
 public class HeroModel {
     private static final String TAG = "HeroModel";
 
-    public void getHeros(final ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>> responseListener) {
+    public static void getHeros(final ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>> responseListener) {
         String url = "http://service.inke.com//api//game_business//game_hero?type=all";
         OkHttpClient mClient = new OkHttpClient();
         Request request = new Request.Builder()
