@@ -1,6 +1,7 @@
 package me.jim.wx.awesomebasicpractice.view.recyclerview.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.decoration.SimpleDecor;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABC1LayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABCLayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.BaseHeroBean;
@@ -54,6 +56,11 @@ public class SimpleView1 extends LinearLayout {
                 });
             }
         });
+
+        SimpleDecor decor = new SimpleDecor();
+        Drawable drawable = getContext().getResources().getDrawable(R.drawable.simple_decor);
+        decor.setDrawable(drawable);
+        recyclerView.addItemDecoration(decor);
     }
 
     private class MyAdapter extends RecyclerView.Adapter<MyItemHolder> {
@@ -84,7 +91,6 @@ public class SimpleView1 extends LinearLayout {
         public MyItemHolder(View view) {
             super(view);
             tvName = (TextView) view;
-            Log.d(TAG, "MyItemHolder: " + count++);
         }
 
         public void setData(BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean data) {
