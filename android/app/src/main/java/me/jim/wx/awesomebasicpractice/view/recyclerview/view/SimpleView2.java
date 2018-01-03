@@ -16,6 +16,8 @@ import java.util.List;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABC1LayoutManager;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABCLayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.HexagonLayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.BaseHeroBean;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.HeroModel;
@@ -54,6 +56,27 @@ public class SimpleView2 extends LinearLayout {
                         mAdapter.notifyDataSetChanged();
                     }
                 });
+            }
+        });
+
+        findViewById(R.id.btn_simple).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setLayoutManager(new ABCLayoutManager(getContext()));
+            }
+        });
+
+        findViewById(R.id.btn_simple_opt).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setLayoutManager(new ABC1LayoutManager(getContext()));
+            }
+        });
+
+        findViewById(R.id.btn_circle).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setLayoutManager(new HexagonLayoutManager());
             }
         });
     }
