@@ -50,4 +50,7 @@ dependencies {
     //react-native
     implementation 'com.facebook.react:react-native:+'
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
 }

@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 /**
  * Created by wx on 2018/1/3.
+ *
+ * 优化的版本
+ * 1、初始实例一定数量的view
+ * 2、滑动过程中循环利用
  */
 
 public class ABC1LayoutManager extends RecyclerView.LayoutManager {

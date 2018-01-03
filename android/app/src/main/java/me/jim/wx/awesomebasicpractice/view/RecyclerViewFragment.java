@@ -16,6 +16,7 @@ import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.view.SimpleView1;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.view.SimpleView2;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +62,9 @@ public class RecyclerViewFragment extends Fragment {
         viewPager.setAdapter(pagerAdapter);
 
         views.add(new SimpleView1(getContext()));
+        views.add(new SimpleView1(getContext()));
+        views.add(new SimpleView1(getContext()));
+        views.add(new SimpleView2(getContext()));
         pagerAdapter.notifyDataSetChanged();
     }
 
