@@ -49,12 +49,16 @@ public class ABC1LayoutManager extends RecyclerView.LayoutManager {
             offsetY += height;
         }
 
-        //还是有点问题
-        resolveCount = getHeight() / height + 1;
+        //还是有点问题, 初始数量为1.5倍整屏数量的item
+        resolveCount = getHeight() / height * 3 / 2;
         fill(recycler, state);
     }
 
     private void fill(RecyclerView.Recycler recycler, RecyclerView.State state) {
+
+        if (state.isPreLayout()) {
+            return;
+        }
 
         Rect displayFrame = new Rect(0, verticalOffsetY, getWidth(), getHeight() + verticalOffsetY);
 
