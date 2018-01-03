@@ -15,6 +15,7 @@ import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABC1LayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABCLayoutManager;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.BaseHeroBean;
 import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.HeroModel;
@@ -38,7 +39,7 @@ public class SimpleView1 extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.layout_rv_simple_view_1, this);
         recyclerView = findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new ABCLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new ABC1LayoutManager(getContext()));
         mAdapter = new MyAdapter();
         recyclerView.setAdapter(mAdapter);
 
