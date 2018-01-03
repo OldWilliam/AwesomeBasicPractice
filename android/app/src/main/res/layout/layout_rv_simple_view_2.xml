@@ -40,6 +40,23 @@
             android:layout_weight="1"
             android:text="环形Layout" />
 
+        <Button
+            android:id="@+id/btn_grid"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:text="表格Layout" />
+
+        <Button
+            android:id="@+id/btn_stag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:text="瀑布流Layout" />
+
+
     </LinearLayout>
 
 </LinearLayout>

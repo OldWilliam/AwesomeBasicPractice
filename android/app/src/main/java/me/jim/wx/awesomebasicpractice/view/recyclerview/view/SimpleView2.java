@@ -1,8 +1,10 @@
 package me.jim.wx.awesomebasicpractice.view.recyclerview.view;
 
 import android.content.Context;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +79,20 @@ public class SimpleView2 extends LinearLayout {
             @Override
             public void onClick(View v) {
                 recyclerView.setLayoutManager(new HexagonLayoutManager());
+            }
+        });
+
+        findViewById(R.id.btn_grid).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+            }
+        });
+
+        findViewById(R.id.btn_stag).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));
             }
         });
     }
