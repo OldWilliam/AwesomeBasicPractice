@@ -61,9 +61,6 @@ public class RecyclerViewFragment extends Fragment {
         pagerAdapter = new MyPagerAdapter();
         viewPager.setAdapter(pagerAdapter);
 
-        views.add(new SimpleView1(getContext()));
-        views.add(new SimpleView1(getContext()));
-        views.add(new SimpleView1(getContext()));
         views.add(new SimpleView2(getContext()));
         pagerAdapter.notifyDataSetChanged();
     }

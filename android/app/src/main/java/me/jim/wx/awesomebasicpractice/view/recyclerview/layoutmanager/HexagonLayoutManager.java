@@ -30,10 +30,9 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
     private int horizontalOffset = 0;
     private int itemWidth;
     private int itemHeight;
-    private int maxLevel = 6;
+    private int maxLevel = 0;
     private SparseArray<Rect> allItems = new SparseArray<>();
 
-    private Point center;
     private Rect centerRect;
 
     @Override
@@ -50,9 +49,19 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
         itemWidth = getDecoratedMeasuredWidth(zero);
         itemHeight = getDecoratedMeasuredHeight(zero);
 
-        center = new Point(getWidth() / 2 + horizontalOffset, getHeight() / 2 + verticalOffset);
+        Point center = new Point(getWidth() / 2, getHeight() / 2);
         centerRect = new Rect(center.x - itemWidth / 2, center.y - itemHeight / 2, center.x + itemWidth / 2, center.y + itemHeight / 2);
 
+        //计算层级
+        for (int i = 0; ; i++) {
+            int num = (2 * i + 1) * (2 * i + 1);
+            if (num > getItemCount()) {
+                maxLevel = i + 1;
+                break;
+            }
+        }
+
+        //从第0层开始记录位置
         for (int i = 0; i < maxLevel; i++) {
             layoutNChildren(recycler, state, i);
         }
@@ -62,10 +71,11 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
 
     private void fill(RecyclerView.Recycler recycler, RecyclerView.State state) {
 
-        center = new Point(getWidth() / 2 + horizontalOffset, getHeight() / 2 + verticalOffset);
+        //通过原点的偏移，算出来移动后的显示区域
+        Point center = new Point(getWidth() / 2 + horizontalOffset, getHeight() / 2 + verticalOffset);
         centerRect = new Rect(center.x - itemWidth / 2, center.y - itemHeight / 2, center.x + itemWidth / 2, center.y + itemHeight / 2);
 
-        int realLevel = 2;
+        int realLevel = 1;
 
         Rect displayFrame = new Rect(
                 centerRect.left - realLevel * itemWidth,
@@ -88,7 +98,7 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
         for (int i = 0; i < getItemCount(); i++) {
             Rect rect = allItems.get(i);
             if (Rect.intersects(rect, displayFrame)) {
-                View item = recycler.getViewForPosition(i % 20);
+                View item = recycler.getViewForPosition(i);
                 measureChildWithMargins(item, 0, 0);
                 addView(item);
                 layoutDecorated(item,
@@ -168,6 +178,7 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
     public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler, RecyclerView.State state) {
         int realDx = dx;
         offsetChildrenHorizontal(-realDx);
+        //切记要累加
         horizontalOffset += realDx;
         fill(recycler, state);
         return realDx;
@@ -177,6 +188,7 @@ public class HexagonLayoutManager extends RecyclerView.LayoutManager {
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler, RecyclerView.State state) {
         int realDy = dy;
         offsetChildrenVertical(-realDy);
+        //切记要累加
         verticalOffset += realDy;
         fill(recycler, state);
         return realDy;
