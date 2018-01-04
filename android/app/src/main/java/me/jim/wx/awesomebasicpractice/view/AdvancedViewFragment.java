@@ -13,8 +13,8 @@ import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.BaseHeroBean;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.HeroModel;
+import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
+import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.decoration;
+package me.jim.wx.awesomebasicpractice.recyclerview.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

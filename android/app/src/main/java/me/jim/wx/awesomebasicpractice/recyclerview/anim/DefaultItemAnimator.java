@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.anim;
+package me.jim.wx.awesomebasicpractice.recyclerview.anim;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

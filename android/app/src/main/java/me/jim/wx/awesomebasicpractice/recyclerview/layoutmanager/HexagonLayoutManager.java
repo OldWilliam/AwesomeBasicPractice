@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager;
+package me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager;
 
 import android.annotation.SuppressLint;
 import android.graphics.Point;

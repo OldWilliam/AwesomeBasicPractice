@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager;
+package me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager;
 
 import android.content.Context;
 import android.graphics.Rect;

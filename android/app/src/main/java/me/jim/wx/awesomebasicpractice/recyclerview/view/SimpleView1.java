@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.view;
+package me.jim.wx.awesomebasicpractice.recyclerview.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -14,11 +14,11 @@ import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.anim.DefaultItemAnimator;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.decoration.SimpleDecor;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.layoutmanager.ABC1LayoutManager;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.BaseHeroBean;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero.HeroModel;
+import me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager.ABC1LayoutManager;
+import me.jim.wx.awesomebasicpractice.recyclerview.anim.DefaultItemAnimator;
+import me.jim.wx.awesomebasicpractice.recyclerview.decoration.SimpleDecor;
+import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
+import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 
 /**
  * Created by wx on 2018/1/2.

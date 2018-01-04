@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view.recyclerview.model.hero;
+package me.jim.wx.awesomebasicpractice.recyclerview.model.hero;
 
 import android.util.Log;
 

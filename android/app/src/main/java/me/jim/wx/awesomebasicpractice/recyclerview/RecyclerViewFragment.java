@@ -1,11 +1,10 @@
-package me.jim.wx.awesomebasicpractice.view;
+package me.jim.wx.awesomebasicpractice.recyclerview;
 
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.view.SimpleView1;
-import me.jim.wx.awesomebasicpractice.view.recyclerview.view.SimpleView2;
+import me.jim.wx.awesomebasicpractice.recyclerview.view.SimpleView1;
+import me.jim.wx.awesomebasicpractice.recyclerview.view.SimpleView2;
 
 /**
  * A simple {@link Fragment} subclass.

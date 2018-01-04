@@ -1,19 +1,13 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.ActionBar;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 
-import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
-import me.jim.wx.awesomebasicpractice.view.AdvancedViewFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
-import me.jim.wx.awesomebasicpractice.view.RecyclerViewFragment;
+import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
 
 public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
