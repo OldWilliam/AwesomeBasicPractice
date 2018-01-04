@@ -46,6 +46,10 @@ public class SimpleDecor extends RecyclerView.ItemDecoration {
     public void onDrawOver(Canvas c, RecyclerView parent, RecyclerView.State state) {
         mDivider.setBounds(0, 0, parent.getWidth(), 100);
         mDivider.draw(c);
+        mDivider.setBounds(0,0,10,parent.getHeight());
+        mDivider.draw(c);
+        mDivider.setBounds(parent.getWidth() - 10,0,parent.getWidth(),parent.getHeight());
+        mDivider.draw(c);
     }
 
     @Override
