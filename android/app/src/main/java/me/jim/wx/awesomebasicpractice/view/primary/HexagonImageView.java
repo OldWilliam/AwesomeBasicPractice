@@ -100,14 +100,14 @@ public class HexagonImageView extends android.support.v7.widget.AppCompatImageVi
          * 0,radius/4*3
          */
         Path path = new Path();
-        path.lineTo(0, radius / 4);
-        path.lineTo(radius / 4, 0);
-        path.lineTo(radius / 4 * 3, 0);
-        path.lineTo(radius, radius / 4);
-        path.lineTo(radius, radius / 4 * 3);
-        path.lineTo(radius / 4 * 3, radius);
-        path.lineTo(radius / 4, radius);
-        path.lineTo(0, radius / 4 * 3);
+        path.lineTo(0, radius / 3);
+        path.lineTo(radius / 3, 0);
+        path.lineTo(radius / 3 * 2, 0);
+        path.lineTo(radius, radius / 3);
+        path.lineTo(radius, radius / 3 * 2);
+        path.lineTo(radius / 3 * 2, radius);
+        path.lineTo(radius / 3, radius);
+        path.lineTo(0, radius / 3 * 2);
         canvas.drawPath(path, paint);
         //核心部分，设置两张图片的相交模式，在这里就是上面绘制的Circle和下面绘制的Bitmap,使前景图和和背景图相交
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));// TODO: 2017/12/14
