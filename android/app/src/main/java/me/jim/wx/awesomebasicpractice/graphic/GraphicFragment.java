@@ -7,14 +7,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
@@ -39,6 +45,12 @@ public class GraphicFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_graphic, container, false);
     }
 
+    private RecyclerView rvDrawable;
+    private SimpleAdapter drawableAdapter;
+
+    private RecyclerView rvAnim;
+    private SimpleAdapter animAdapter;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         LinearLayout ll = view.findViewById(R.id.ll_screen);
@@ -57,5 +69,54 @@ public class GraphicFragment extends Fragment {
                 imageView.post(runnable);
             }
         });
+
+        rvDrawable = view.findViewById(R.id.rv_drawable);
+        rvDrawable.setLayoutManager(new LinearLayoutManager(getContext()));
+        drawableAdapter = new SimpleAdapter();
+        rvDrawable.setAdapter(drawableAdapter);
+        drawableAdapter.setData(Arrays.asList(getContext().getResources().getStringArray(R.array.drawable_item)));
+
+        rvAnim = view.findViewById(R.id.rv_anim);
+        rvAnim.setLayoutManager(new LinearLayoutManager(getContext()));
+        animAdapter = new SimpleAdapter();
+        rvAnim.setAdapter(animAdapter);
+        animAdapter.setData(Arrays.asList(getContext().getResources().getStringArray(R.array.anim_item)));
+    }
+
+    private class SimpleAdapter extends RecyclerView.Adapter {
+        private List<String> texts = new ArrayList<>();
+        @Override
+        public SimpleHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new SimpleHolder(new TextView(parent.getContext()));
+        }
+
+        @Override
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            SimpleHolder h = (SimpleHolder) holder;
+            h.data(texts.get(position));
+        }
+
+        @Override
+        public int getItemCount() {
+            return texts.size();
+        }
+
+        public void setData(List<String> texts) {
+            this.texts = texts;
+            notifyDataSetChanged();
+        }
+    }
+
+    private class SimpleHolder extends RecyclerView.ViewHolder {
+        private TextView tvText;
+
+        public SimpleHolder(View itemView) {
+            super(itemView);
+            tvText = (TextView) itemView;
+        }
+
+        public void data(String s) {
+            tvText.setText(s);
+        }
     }
 }
