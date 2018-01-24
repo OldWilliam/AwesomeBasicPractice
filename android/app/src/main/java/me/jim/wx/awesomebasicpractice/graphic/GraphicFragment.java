@@ -1,8 +1,8 @@
 package me.jim.wx.awesomebasicpractice.graphic;
 
 
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,11 +19,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import org.xml.sax.XMLReader;
 
@@ -37,7 +41,6 @@ import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.http.ResponseListener;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
-import me.jim.wx.awesomebasicpractice.view.primary.CircleImageView;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
 
 /**
@@ -104,7 +107,8 @@ public class GraphicFragment extends Fragment {
 //        String str = "<html><<font color='#333333' size='16'>登陆填写我的邀请码</font><br><<font color='#7340b5' size='40'>YFREE</font><br><font color='#333333' size='16'>获得</font><font size= ‘16’ color='#7340b5'>答错复活</font><font size=‘16’ color='#333333'>机会</font></html>";
         String str = "<html><<font color='#333333' size=16>登陆填写我的邀请码</font><br><<font color='#7340b5' size=40>YFREE</font><br><font color='#333333' size=16>获得</font><font size=16 color='#7340b5'>答错复活</font><font size=16 color='#333333'>机会</font></html>";
         String str1 = "<html><font size =14 color= white>登录填写我的邀请码：</font><font size =16 color='#FFd215'>YFREE</font><br><br><font size = 14 color = white>获得</font><font size = 14 color='#FFD215'>答错复活</font><font color=white size = 14>机会</font></html>";
-        String src = str1;
+        String str2 = "<html><font size=14 color=white>输入邀请码</font><font size=14 color='#FBFB99'>686868</font><br><font size=14 color=white>即可获得一张复活卡</font></html>";
+        String src = str2;
         src = src.replaceAll("font", "fontBySize");
 //        tvDisplay.setText(Html.fromHtml(src, null, new HTMLTagGetter()));
         tvDisplay.setText(Html.fromHtml(src, null, new HTMLTagGetter()));

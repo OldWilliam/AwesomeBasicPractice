@@ -84,4 +84,31 @@ public class LessonOne {
                     }
                 });
     }
+
+    /**
+     * empty不能调到onNext，直接通知onComplete
+     */
+    public void caseEmpty() {
+        Observable.empty().subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                Log.d(TAG, "onNext: Empty");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "onComplete: Empty");
+            }
+        });
+    }
 }

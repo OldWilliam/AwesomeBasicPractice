@@ -13,6 +13,7 @@ import android.widget.Toast;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import me.jim.wx.awesomebasicpractice.R;
+import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonOne;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonThree;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonTwo;
 
@@ -63,5 +64,6 @@ public class RxJavaFragment extends Fragment {
 
         LessonTwo.ins().caseFive();
         LessonTwo.ins().caseSix();
+        LessonOne.ins().caseEmpty();
     }
 }

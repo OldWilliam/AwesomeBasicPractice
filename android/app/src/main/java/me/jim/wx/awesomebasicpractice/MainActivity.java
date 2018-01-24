@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
+import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
 import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
 
@@ -53,6 +54,10 @@ public class MainActivity extends FragmentActivity
         } else if (position == 2) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, GraphicFragment.newInstance())
+                    .commit();
+        } else if (position == 3) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, RxJavaFragment.newInstance())
                     .commit();
         }
     }
