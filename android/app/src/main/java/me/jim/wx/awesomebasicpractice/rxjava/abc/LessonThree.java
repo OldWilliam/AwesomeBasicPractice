@@ -174,6 +174,11 @@ public class LessonThree {
      * 等同于merge、concat、zip
      */
     public void caseThree() {
+        /**
+         * caseOne: 1,2,3
+         * caseTwo: 4,5,6
+         * merge: 1,4,2,5,3,6
+         */
         caseOne().mergeWith(caseTwo()).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
@@ -181,6 +186,13 @@ public class LessonThree {
             }
         });
 
+
+        /**
+         * caseOne: 1,2,3
+         * caseTwo: 4,5,6
+         * concat: 1,2,3,4,5,6
+         * 顺序的
+         */
         caseOne().concatWith(caseTwo()).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
@@ -188,6 +200,13 @@ public class LessonThree {
             }
         });
 
+
+        /**
+         * caseOne: 1,2,3,4
+         * caseTwo: 4,5,6
+         * zip: 5,7,9
+         * 最终事件数等于，最少的事件序列数，下面的案例是相加操作
+         */
         caseOne()
                 .zipWith(caseTwo(), new BiFunction<Integer, Integer, String>() {
                     @Override
