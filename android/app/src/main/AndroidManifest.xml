@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".BasicApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".SplashActivity">
             <intent-filter>
@@ -23,8 +24,12 @@
             android:label="@string/title_activity_main" />
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
+        <!--第一种RN集成方式， 只需要Activity-->
         <activity
             android:name=".reactnative.MyReactActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!--第二种RN集成方式，1、需要Activity继承ReactActivity；2、需要在Application添加host-->
+        <activity android:name=".reactnative.MyReactActivity2"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"/>
     </application>
 </manifest>

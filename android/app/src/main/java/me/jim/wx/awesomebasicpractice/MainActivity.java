@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
 import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity;
+import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity2;
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
 import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
@@ -46,7 +47,7 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (position == 0) {
-            startActivity(new Intent(this, MyReactActivity.class));
+            startActivity(new Intent(this, MyReactActivity2.class));
         } else if (position == 1) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, RecyclerViewFragment.newInstance())
