@@ -5,4 +5,12 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppcompatTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
+    <style name="ReactTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarSize">48dp</item>
+    </style>
+
 </resources>

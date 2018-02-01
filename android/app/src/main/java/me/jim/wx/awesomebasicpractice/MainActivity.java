@@ -3,18 +3,18 @@ package me.jim.wx.awesomebasicpractice;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
-import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity;
 import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity2;
+import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
-import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
 
-public class MainActivity extends FragmentActivity
+public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -82,7 +82,7 @@ public class MainActivity extends FragmentActivity
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);

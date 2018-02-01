@@ -20,7 +20,7 @@ import javax.annotation.Nullable;
 /**
  * Base Activity for React Native applications.
  */
-public abstract class ReactActivityCopy extends Activity
+public abstract class ReactActivityCopy extends AppCompatActivity
         implements DefaultHardwareBackBtnHandler, PermissionAwareActivity {
 
     private final ReactActivityDelegateCopy mDelegate;
