@@ -1,12 +1,14 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
+import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity;
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
 import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
@@ -44,18 +46,20 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (position == 0) {
+            startActivity(new Intent(this, MyReactActivity.class));
+        } else if (position == 1) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, RecyclerViewFragment.newInstance())
                     .commit();
-        } else if (position == 1) {
+        } else if (position == 2) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PrimaryViewFragment.newInstance())
                     .commit();
-        } else if (position == 2) {
+        } else if (position == 3) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, GraphicFragment.newInstance())
                     .commit();
-        } else if (position == 3) {
+        } else if (position == 4) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, RxJavaFragment.newInstance())
                     .commit();
