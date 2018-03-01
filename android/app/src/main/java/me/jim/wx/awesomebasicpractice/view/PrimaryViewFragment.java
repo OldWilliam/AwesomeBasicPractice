@@ -1,12 +1,18 @@
 package me.jim.wx.awesomebasicpractice.view;
 
 
+import android.animation.ObjectAnimator;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
@@ -38,7 +44,10 @@ public class PrimaryViewFragment extends Fragment {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
         }
         layout.setArrow(true);
-    }
 
+        ImageView progress = view.findViewById(R.id.progress);
+        Animation rotateAnim = AnimationUtils.loadAnimation(getContext(), R.anim.roate);
+        progress.startAnimation(rotateAnim);
+    }
 
 }
