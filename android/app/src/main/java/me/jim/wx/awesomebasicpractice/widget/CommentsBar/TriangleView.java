@@ -11,22 +11,43 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.View;
 
 /**
  * Created by wx on 2018/3/1.
- *
+ * <p>
  * 三角形的View，可以让图片显示成三角形
  */
 
 public class TriangleView extends android.support.v7.widget.AppCompatImageView {
     public TriangleView(Context context) {
         super(context);
+        initView();
     }
 
     public TriangleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        initView();
+    }
+
+    private void initView() {
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+    }
+
+    public void setSelect(boolean isSelect) {
+        if (isSelect) {
+            setBackgroundColor(Color.YELLOW);
+        } else {
+            setBackgroundColor(Color.RED);
+        }
     }
 
     @Override

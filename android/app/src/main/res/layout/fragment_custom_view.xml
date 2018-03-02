@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <me.jim.wx.awesomebasicpractice.widget.CommentsBar.CommentsBar
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center">
