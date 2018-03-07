@@ -34,20 +34,29 @@ public class PrimaryViewFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        testFlowLayout(view);
+        init(view);
     }
 
-    private void testFlowLayout(View view) {
+    private void init(View view) {
+        /*流式布局*/
+        initFlowLayout(view);
+        /*shape 实现圆形进度条*/
+        initProgressView(view);
+    }
+
+    private void initProgressView(View view) {
+        ImageView progress = view.findViewById(R.id.progress);
+        Animation rotateAnim = AnimationUtils.loadAnimation(getContext(), R.anim.roate);
+        progress.startAnimation(rotateAnim);
+    }
+
+    private void initFlowLayout(View view) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         FlowLayout layout = view.findViewById(R.id.flow_layout);
         for (int i = 0; i < 19; i++) {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
         }
         layout.setArrow(true);
-
-        ImageView progress = view.findViewById(R.id.progress);
-        Animation rotateAnim = AnimationUtils.loadAnimation(getContext(), R.anim.roate);
-        progress.startAnimation(rotateAnim);
     }
 
 }
