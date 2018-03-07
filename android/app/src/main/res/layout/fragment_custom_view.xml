@@ -11,6 +11,11 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <TextureView
+            android:id="@+id/textureview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
         <me.jim.wx.awesomebasicpractice.widget.CommentsBar.CommentsBar
             android:layout_width="wrap_content"
             android:layout_height="36dp"

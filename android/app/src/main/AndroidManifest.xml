@@ -3,6 +3,11 @@
     package="me.jim.wx.awesomebasicpractice">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--开启摄像头需要的权限-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
 
     <application
         android:allowBackup="true"

@@ -1,18 +1,20 @@
 package me.jim.wx.awesomebasicpractice.view;
 
 
-import android.animation.ObjectAnimator;
-import android.media.Image;
+import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+
+import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
@@ -42,6 +44,41 @@ public class PrimaryViewFragment extends Fragment {
         initFlowLayout(view);
         /*shape 实现圆形进度条*/
         initProgressView(view);
+        /*TextureView使用*/
+        initTextureView(view);
+    }
+
+    private void initTextureView(View view) {
+        TextureView textureView = view.findViewById(R.id.textureview);
+        final Camera camera = Camera.open();
+        textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
+            @Override
+            public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+                try {
+                    camera.setPreviewTexture(surface);
+                    camera.startPreview();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+            }
+
+            @Override
+            public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+                camera.stopPreview();
+                camera.release();
+                return true;
+            }
+
+            @Override
+            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+            }
+        });
     }
 
     private void initProgressView(View view) {
