@@ -11,6 +11,14 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <RadioButton
+            android:checked="false"
+            android:id="@+id/radiobutton"
+            android:background="@drawable/selector_rb"
+            android:button="@null"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+
         <TextureView
             android:id="@+id/textureview"
             android:layout_width="match_parent"

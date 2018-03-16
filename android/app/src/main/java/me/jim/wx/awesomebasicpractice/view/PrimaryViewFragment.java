@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 
 import java.io.IOException;
 
@@ -46,6 +47,13 @@ public class PrimaryViewFragment extends Fragment {
         initProgressView(view);
         /*TextureView使用*/
         initTextureView(view);
+        /*RadioButton*/
+        initRadioButton(view);
+    }
+
+    private void initRadioButton(View view) {
+        RadioButton button = view.findViewById(R.id.radiobutton);
+        button.setButtonDrawable(null);
     }
 
     private void initTextureView(View view) {
