@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
 import java.io.IOException;
@@ -49,6 +50,13 @@ public class PrimaryViewFragment extends Fragment {
         initTextureView(view);
         /*RadioButton*/
         initRadioButton(view);
+        /*扩展动画View*/
+        initExpandAnimView(view);
+    }
+
+    private void initExpandAnimView(View view) {
+        View target = view.findViewById(R.id.expand_anim_view);
+        target.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 540));
     }
 
     private void initRadioButton(View view) {

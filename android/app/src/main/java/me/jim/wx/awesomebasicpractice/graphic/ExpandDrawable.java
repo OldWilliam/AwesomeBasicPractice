@@ -29,16 +29,14 @@ public class ExpandDrawable extends Drawable implements Animatable {
         mPaint.setAntiAlias(true);
         mAnimator = ValueAnimator.ofInt(Color.BLACK, Color.WHITE);
         mAnimator.setRepeatCount(ValueAnimator.INFINITE);
-        mAnimator.setRepeatMode(ValueAnimator.RESTART);
+        mAnimator.setRepeatMode(ValueAnimator.REVERSE);
         mAnimator.setDuration(1200);
         mAnimator.setEvaluator(new ArgbEvaluator());
         mAnimator.setInterpolator(new DecelerateInterpolator());
         mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                Log.d(TAG, "onAnimationUpdate: fraction" + animation.getAnimatedFraction());
                 mFraction = animation.getAnimatedFraction();
-                Log.d(TAG, "onAnimationUpdate: value" + Integer.toHexString((Integer) animation.getAnimatedValue()));
                 mPaint.setColor((Integer) animation.getAnimatedValue());
                 invalidateSelf();
             }
