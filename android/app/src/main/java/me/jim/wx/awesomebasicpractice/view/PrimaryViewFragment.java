@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
+import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
 /**
@@ -52,6 +53,13 @@ public class PrimaryViewFragment extends Fragment {
         initRadioButton(view);
         /*扩展动画View*/
         initExpandAnimView(view);
+        /*设置drawable*/
+        initDrawableView(view);
+    }
+
+    private void initDrawableView(View view) {
+        QuestionMarkDrawable drawable = new QuestionMarkDrawable();
+        view.findViewById(R.id.drawable_view).setBackgroundDrawable(drawable);
     }
 
     private void initExpandAnimView(View view) {

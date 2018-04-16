@@ -11,6 +11,12 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <View
+            android:id="@+id/drawable_view"
+            android:layout_gravity="center"
+            android:layout_width="10dp"
+            android:layout_height="10dp"/>
+
         <me.jim.wx.awesomebasicpractice.anim.ExpandAnimView
             android:id="@+id/expand_anim_view"
             android:layout_width="match_parent"
