@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<objectAnimator-->
+    <!--android:duration="2000"-->
+    <!--android:propertyName="alpha"-->
+    <!--android:repeatCount="infinite"-->
+    <!--android:repeatMode="restart"-->
+    <!--android:valueFrom="1"-->
+    <!--android:valueTo="0">-->
+    <!--<propertyValuesHolder android:propertyName="translationX" />-->
+    <!--<propertyValuesHolder-->
+    <!--android:propertyName="alpha"-->
+    <!--android:valueFrom="1"-->
+    <!--android:valueTo="0">-->
+    <!--<keyframe></keyframe>-->
+    <!--</propertyValuesHolder>-->
+    <!--</objectAnimator>-->
+    <objectAnimator
+        android:duration="2000"
+        android:propertyName="translationX"
+        android:repeatCount="infinite"
+        android:repeatMode="restart"
+        android:valueFrom="100%p"
+        android:valueTo="0">
 
+    </objectAnimator>
 </set>
