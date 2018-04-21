@@ -11,29 +11,39 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_hook"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@android:color/black"
+            android:gravity="center"
+            android:text="HOOK"
+            android:textColor="@color/colorPrimary" />
+
         <me.jim.wx.awesomebasicpractice.anim.SlideTipView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <View
-            android:contentDescription="用来测试各种Drawable"
             android:id="@+id/drawable_view"
-            android:layout_gravity="center"
             android:layout_width="10dp"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp"
+            android:layout_gravity="center"
+            android:contentDescription="用来测试各种Drawable" />
 
         <me.jim.wx.awesomebasicpractice.anim.ExpandAnimView
             android:id="@+id/expand_anim_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <RadioButton
-            android:checked="false"
             android:id="@+id/radiobutton"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@drawable/selector_rb"
             android:button="@null"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:checked="false" />
 
         <TextureView
             android:id="@+id/textureview"

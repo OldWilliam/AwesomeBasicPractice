@@ -15,11 +15,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
+import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
 /**
@@ -55,6 +58,19 @@ public class PrimaryViewFragment extends Fragment {
         initExpandAnimView(view);
         /*设置drawable*/
         initDrawableView(view);
+        /*hook 测试*/
+        initHookView(view);
+    }
+
+    private void initHookView(View view) {
+        TextView tvHook = view.findViewById(R.id.tv_hook);
+        tvHook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "HAHA", Toast.LENGTH_SHORT).show();
+            }
+        });
+        HookHelper.hookClickListener(tvHook);
     }
 
     private void initDrawableView(View view) {

@@ -1,6 +1,7 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
@@ -20,6 +21,12 @@ import me.jim.wx.awesomebasicpractice.reactnative.nativemodule.MyReactPackage;
  */
 
 public class BasicApplication extends Application implements ReactApplication{
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ContextHelper.init(this);
+    }
 
     @Override
     public ReactNativeHost getReactNativeHost() {
