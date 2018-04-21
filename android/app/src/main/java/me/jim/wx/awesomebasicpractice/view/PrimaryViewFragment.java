@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
+import me.jim.wx.awesomebasicpractice.other.aspect.VisitorAnnotation;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
@@ -66,11 +67,12 @@ public class PrimaryViewFragment extends Fragment {
         TextView tvHook = view.findViewById(R.id.tv_hook);
         tvHook.setOnClickListener(new View.OnClickListener() {
             @Override
+            @VisitorAnnotation
             public void onClick(View v) {
                 Toast.makeText(getContext(), "HAHA", Toast.LENGTH_SHORT).show();
             }
         });
-        HookHelper.hookClickListener(tvHook);
+//        HookHelper.hookClickListener(tvHook);
     }
 
     private void initDrawableView(View view) {

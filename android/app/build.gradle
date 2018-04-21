@@ -1,3 +1,8 @@
+import com.android.build.gradle.AppPlugin
+import org.aspectj.bridge.IMessage
+import org.aspectj.bridge.MessageHandler
+import org.aspectj.tools.ajc.Main
+
 apply plugin: 'com.android.application'
 
 android {
@@ -54,4 +59,57 @@ dependencies {
     implementation 'com.android.support:support-annotations:27.0.2'
     implementation 'com.android.support:support-v4:27.0.2'
     implementation 'com.android.support:recyclerview-v7:27.0.2'
+
+    implementation 'org.aspectj:aspectjrt:1.8+'
+}
+
+//AndroidAopDemo.build.gradle
+//此处是编译一个App，所以使用的applicationVariants变量，否则使用libraryVariants变量
+//这是由Android插件引入的。所以，需要import com.android.build.gradle.AppPlugin;
+android.applicationVariants.all { variant ->
+    /*
+      这段代码之意是：
+      当app编译个每个variant之后，在javaCompile任务的最后添加一个action。此action
+      调用ajc函数，对上一步生成的class文件进行aspectj处理。
+    */
+    AppPlugin plugin = project.plugins.getPlugin(AppPlugin)
+    JavaCompile javaCompile = variant.javaCompile
+    javaCompile.doLast{
+        String bootclasspath = project.android.bootClasspath.join(File.pathSeparator)
+        //ajc是一个函数，位于utils.gradle中
+        ajc(bootclasspath,javaCompile)
+    }
+}
+
+def ajc(String androidbootClassFiles, JavaCompile javaCompile) {
+    String[] args = ["-showWeaveInfo",
+                     "-1.8",
+                     "-inpath", javaCompile.destinationDir.toString(),
+                     "-aspectpath", javaCompile.classpath.asPath,
+                     "-d", javaCompile.destinationDir.toString(),
+                     "-classpath", javaCompile.classpath.asPath,
+                     "-bootclasspath", androidbootClassFiles]
+
+    println "ajc args: " + args.toString()
+    MessageHandler handler = new MessageHandler(true);
+    new Main().run(args, handler)
+
+    def log = project.logger
+    for (IMessage message : handler.getMessages(null, true)) {
+        switch (message.getKind()) {
+            case IMessage.ABORT:
+            case IMessage.ERROR:
+            case IMessage.FAIL:
+                log.error message.message, message.thrown
+                throw message.thrown
+                break;
+            case IMessage.WARNING:
+            case IMessage.INFO:
+                log.info message.message, message.thrown
+                break;
+            case IMessage.DEBUG:
+                log.debug message.message, message.thrown
+                break;
+        }
+    }
 }
