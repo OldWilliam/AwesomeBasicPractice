@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice;
+package me.jim.wx.awesomebasicpractice.util;
 
 import android.app.Application;
 import android.content.Context;

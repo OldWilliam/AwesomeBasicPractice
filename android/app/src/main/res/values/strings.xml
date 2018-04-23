@@ -2,11 +2,12 @@
     <string name="app_name">AwesomeBasicPractice</string>
     <string name="title_activity_main">MainActivity</string>
 
-    <string name="title_section0">ReactView</string>
+    <string name="title_section0">ReactNative</string>
     <string name="title_section1">RecyclerView</string>
     <string name="title_section2">PrimaryView</string>
-    <string name="title_section3">GraphicFragment</string>
+    <string name="title_section3">Graphic</string>
     <string name="title_section4">RxJava</string>
+    <string name="title_section5">Annotation</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -21,7 +22,7 @@
         <item>shape</item>
     </string-array>
 
-    <string-array name="anim_item" >
+    <string-array name="anim_item">
         <item>alpha</item>
     </string-array>
 </resources>

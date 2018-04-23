@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice;
+package me.jim.wx.awesomebasicpractice.view;
 
 
 import android.app.Activity;
@@ -25,6 +25,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.facebook.react.ReactFragmentActivity;
+
+import me.jim.wx.awesomebasicpractice.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -110,7 +112,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section1),
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
-                        getString(R.string.title_section4)
+                        getString(R.string.title_section4),
+                        getString(R.string.title_section5)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

@@ -1,8 +1,6 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.Application;
-import android.content.Context;
-import android.util.Log;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -15,6 +13,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import me.jim.wx.awesomebasicpractice.reactnative.nativemodule.MyReactPackage;
+import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
 /**
  * Created by wx on 2018/2/1.

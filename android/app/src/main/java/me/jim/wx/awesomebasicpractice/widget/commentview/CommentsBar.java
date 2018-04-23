@@ -1,11 +1,10 @@
-package me.jim.wx.awesomebasicpractice.widget.CommentsBar;
+package me.jim.wx.awesomebasicpractice.widget.commentview;
 
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.LinearLayout;
 
 /**

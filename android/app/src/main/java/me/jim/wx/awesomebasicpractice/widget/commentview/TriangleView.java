@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.widget.CommentsBar;
+package me.jim.wx.awesomebasicpractice.widget.commentview;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -11,8 +11,6 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;

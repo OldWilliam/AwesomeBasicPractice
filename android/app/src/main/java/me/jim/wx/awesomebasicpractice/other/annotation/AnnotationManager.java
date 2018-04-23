@@ -1,9 +1,5 @@
 package me.jim.wx.awesomebasicpractice.other.annotation;
 
-import android.widget.Toast;
-
-import me.jim.wx.awesomebasicpractice.ContextHelper;
-
 /**
  * Created by wx on 2018/4/23.
  */
@@ -12,15 +8,15 @@ import me.jim.wx.awesomebasicpractice.ContextHelper;
 public class AnnotationManager {
     private static final AnnotationManager ourInstance = new AnnotationManager();
 
-    static AnnotationManager getInstance() {
+    public static AnnotationManager ins() {
         return ourInstance;
     }
 
     private AnnotationManager() {
     }
 
-    public void getRuntimeInfo() {
-        ClassPreamble preamble = AnnotationManager.class.getAnnotation(ClassPreamble.class);
-        Toast.makeText(ContextHelper.getContext(), preamble.toString(), Toast.LENGTH_SHORT).show();
+    public <T extends Object> String getPreamble(Class<T> t) {
+        ClassPreamble preamble =  t.getAnnotation(ClassPreamble.class);
+        return preamble.toString();
     }
 }

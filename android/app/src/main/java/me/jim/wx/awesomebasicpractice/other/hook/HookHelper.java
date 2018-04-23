@@ -7,7 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import me.jim.wx.awesomebasicpractice.ContextHelper;
+import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
 /**
  * Created by wx on 2018/4/21.

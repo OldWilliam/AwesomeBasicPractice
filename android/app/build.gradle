@@ -74,10 +74,10 @@ android.applicationVariants.all { variant ->
     */
     AppPlugin plugin = project.plugins.getPlugin(AppPlugin)
     JavaCompile javaCompile = variant.javaCompile
-    javaCompile.doLast{
+    javaCompile.doLast {
         String bootclasspath = project.android.bootClasspath.join(File.pathSeparator)
         //ajc是一个函数，位于utils.gradle中
-        ajc(bootclasspath,javaCompile)
+        ajc(bootclasspath, javaCompile)
     }
 }
 

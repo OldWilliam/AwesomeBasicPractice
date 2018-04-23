@@ -8,9 +8,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
+import me.jim.wx.awesomebasicpractice.other.OtherFragment;
 import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity2;
 import me.jim.wx.awesomebasicpractice.recyclerview.RecyclerViewFragment;
 import me.jim.wx.awesomebasicpractice.rxjava.RxJavaFragment;
+import me.jim.wx.awesomebasicpractice.view.NavigationDrawerFragment;
 import me.jim.wx.awesomebasicpractice.view.PrimaryViewFragment;
 
 public class MainActivity extends AppCompatActivity
@@ -62,6 +64,10 @@ public class MainActivity extends AppCompatActivity
         } else if (position == 4) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, RxJavaFragment.newInstance())
+                    .commit();
+        } else if (position == 5) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, OtherFragment.newInstance())
                     .commit();
         }
     }

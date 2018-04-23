@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
-import me.jim.wx.awesomebasicpractice.ContextHelper;
+import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
 /**
  * Created by wx on 2018/4/21.

@@ -50,45 +50,45 @@
             android:layout_width="match_parent"
             android:layout_height="300dp" />
 
-        <me.jim.wx.awesomebasicpractice.widget.CommentsBar.CommentsBar
+        <me.jim.wx.awesomebasicpractice.widget.commentview.CommentsBar
             android:layout_width="wrap_content"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center">
 
-            <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+            <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent" />
 
-            <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+            <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent" />
 
-            <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+            <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent" />
 
-            <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+            <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent" />
 
-            <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+            <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorAccent" />
 
-        </me.jim.wx.awesomebasicpractice.widget.CommentsBar.CommentsBar>
+        </me.jim.wx.awesomebasicpractice.widget.commentview.CommentsBar>
 
-        <me.jim.wx.awesomebasicpractice.widget.CommentsBar.TriangleView
+        <me.jim.wx.awesomebasicpractice.widget.commentview.TriangleView
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:layout_gravity="center_horizontal"
