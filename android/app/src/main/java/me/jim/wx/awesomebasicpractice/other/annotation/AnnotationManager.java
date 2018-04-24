@@ -15,8 +15,20 @@ public class AnnotationManager {
     private AnnotationManager() {
     }
 
-    public <T extends Object> String getPreamble(Class<T> t) {
+    /**
+     * 获取类注解信息
+     */
+    public <T extends Object> String getClassAnnotation(Class<T> t) {
         ClassPreamble preamble =  t.getAnnotation(ClassPreamble.class);
         return preamble.toString();
+    }
+
+    public String getMethodAnnotation(String clzName) {
+        try {
+            Class clazz = Class.forName(clzName);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }

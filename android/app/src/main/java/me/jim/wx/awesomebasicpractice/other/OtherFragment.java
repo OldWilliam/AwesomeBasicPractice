@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
-import me.jim.wx.awesomebasicpractice.other.annotation.ClassPreamble;
 
 /**
  * 其他类型
@@ -39,7 +38,7 @@ public class OtherFragment extends Fragment {
         view.findViewById(R.id.tv_annotation).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), AnnotationManager.ins().getPreamble(AnnotationManager.class), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), AnnotationManager.ins().getClassAnnotation(AnnotationManager.class), Toast.LENGTH_SHORT).show();
             }
         });
     }
