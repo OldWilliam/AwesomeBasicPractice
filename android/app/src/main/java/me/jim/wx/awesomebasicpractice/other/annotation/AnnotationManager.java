@@ -1,5 +1,11 @@
 package me.jim.wx.awesomebasicpractice.other.annotation;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+
 /**
  * Created by wx on 2018/4/23.
  */
@@ -23,12 +29,27 @@ public class AnnotationManager {
         return preamble.toString();
     }
 
+    /**
+     * 获取方法注解信息
+     * @param clzName
+     */
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @MethodAnnotation
+    @Deprecated
     public String getMethodAnnotation(String clzName) {
+        StringBuilder sb = new StringBuilder();
         try {
             Class clazz = Class.forName(clzName);
-
+            for (Method m : clazz.getMethods()) {
+                for (Annotation annotation : m.getDeclaredAnnotations()) {
+                    sb.append(annotation.toString().concat("/n"));
+                }
+            }
+            return sb.toString();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
     }
 }
