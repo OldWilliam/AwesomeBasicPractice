@@ -135,7 +135,6 @@ public class PrimaryViewFragment extends Fragment {
         for (int i = 0; i < 19; i++) {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
         }
-        layout.setArrow(true);
     }
 
 }

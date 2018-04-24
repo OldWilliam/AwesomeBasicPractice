@@ -19,11 +19,6 @@ public class FlowLayout extends ViewGroup {
     private int mItemGap = 0;
     private int mLineMargin = 0;
     private int mLineHeight = 0;
-    private boolean isShrink = true;
-    private boolean isShowArrow = false;
-
-    private ArrowView mArrow;
-    private int mVisibleCount;
 
     public FlowLayout(Context context) {
         super(context);
@@ -42,7 +37,6 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        mVisibleCount = getChildCount() - (isShowArrow ? 0 : 1);
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int mLineWidth = 0;
@@ -52,14 +46,6 @@ public class FlowLayout extends ViewGroup {
         }
         for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
-            if (isShrink && isShowArrow) {
-                if (mLineWidth + childView.getMeasuredWidth() + mItemGap + mLineHeight/*araow的宽即是行高*/ > width) {
-                    mVisibleCount = i;
-                    break;
-                }
-                mLineWidth = mLineWidth + childView.getMeasuredWidth() + mItemGap;
-                continue;
-            }
             if (mLineWidth + childView.getMeasuredWidth() > width) {
                 mLineWidth = childView.getMeasuredWidth();
                 mLineCount++;
@@ -81,7 +67,7 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        for (int i = 0; i < mVisibleCount; i++) {
+        for (int i = 0; i < getChildCount(); i++) {
             View childView = getChildAt(i);
             if (i == 0) {
                 l = 0;
@@ -103,43 +89,6 @@ public class FlowLayout extends ViewGroup {
                 r = l + childView.getMeasuredWidth();
             }
             childView.layout(l, t, r, b);
-        }
-
-        if (isShowArrow) {
-            l = getMeasuredWidth() - mLineHeight;
-            r = getMeasuredWidth();
-            mArrow.layout(l, t, r, b);
-        }
-
-        //不可见区域的View就要让它们不可见
-        for (int i = mVisibleCount; i < getChildCount() - (isShowArrow ? 1 : 0); i++) {
-            getChildAt(i).layout(0,0,0,0);
-        }
-    }
-
-
-    public void setArrow(boolean b) {
-        isShowArrow = b;
-        if (b) {
-            if (mArrow == null) {
-                mArrow = new ArrowView(getContext());
-                addView(mArrow);
-            }
-        } else {
-            if (mArrow != null) {
-                removeView(mArrow);
-            }
-        }
-
-        if (isShowArrow) {
-            mArrow.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    isShrink = !isShrink;
-                    mArrow.setRotation(isShrink ? 0 : 180);
-                    requestLayout();
-                }
-            });
         }
     }
 }
