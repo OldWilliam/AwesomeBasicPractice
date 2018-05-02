@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import me.jim.wx.annotations.MyAnnotation;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
 
 /**
  * 其他类型
  */
+@MyAnnotation
 public class OtherFragment extends Fragment {
 
     public static OtherFragment newInstance() {
