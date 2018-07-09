@@ -64,6 +64,9 @@ dependencies {
 
     annotationProcessor project(':AnnotationCompiler')
     compile project(path: ':Annotations')
+
+    compile 'com.google.guava:guava:25.1-jre'
+    api 'com.google.guava:guava:25.1-android'
 }
 
 //AndroidAopDemo.build.gradle
