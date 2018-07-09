@@ -64,6 +64,9 @@ dependencies {
 
     annotationProcessor project(':AnnotationCompiler')
     compile project(path: ':Annotations')
+
+    //RxBinding
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 }
 
 //AndroidAopDemo.build.gradle
