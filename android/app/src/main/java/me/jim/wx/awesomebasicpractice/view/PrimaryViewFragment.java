@@ -1,29 +1,39 @@
 package me.jim.wx.awesomebasicpractice.view;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opensource.svgaplayer.SVGACallback;
+import com.opensource.svgaplayer.SVGADrawable;
+import com.opensource.svgaplayer.SVGAImageView;
+import com.opensource.svgaplayer.SVGAParser;
+import com.opensource.svgaplayer.SVGAVideoEntity;
+
 import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.other.aspect.VisitorAnnotation;
-import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
 /**
@@ -61,6 +71,8 @@ public class PrimaryViewFragment extends Fragment {
         initDrawableView(view);
         /*hook 测试*/
         initHookView(view);
+        /*svga*/
+        initSVGA(view);
     }
 
     private void initHookView(View view) {
@@ -135,6 +147,76 @@ public class PrimaryViewFragment extends Fragment {
         for (int i = 0; i < 19; i++) {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
         }
+    }
+
+    private void initSVGA(final View parent) {
+        parent.findViewById(R.id.btn_svga).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final LinearLayout animContainer = parent.findViewById(R.id.container_primary);
+
+                final SVGAImageView svgaImageView = new SVGAImageView(getContext());
+                svgaImageView.setLoops(1);
+                svgaImageView.setCallback(new SVGACallback() {
+                    @Override
+                    public void onPause() {
+                        Log.d("PrimaryViewFragment", "onPause: ");
+                    }
+
+                    @Override
+                    public void onFinished() {
+                        Log.d("PrimaryViewFragment", "onFinished: ");
+                    }
+
+                    @Override
+                    public void onRepeat() {
+                        Log.d("PrimaryViewFragment", "onRepeat: ");
+                    }
+
+                    @Override
+                    public void onStep(int i, double v) {
+                        Log.d("PrimaryViewFragment", "onStep: ");
+                    }
+                });
+
+                final ValueAnimator animator = ValueAnimator.ofInt(1).setDuration(3000);
+                animator.setInterpolator(new LinearInterpolator());
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator animation) {
+                        svgaImageView.stepToPercentage(animation.getAnimatedFraction(), true);
+                    }
+                });
+                animator.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        svgaImageView.stopAnimation();
+                        animContainer.removeView(svgaImageView);
+                    }
+                });
+
+
+                SVGAParser svgaParser = new SVGAParser(getContext());
+                svgaParser.parse("first_blood.svga", new SVGAParser.ParseCompletion() {
+                    @Override
+                    public void onComplete(SVGAVideoEntity svgaVideoEntity) {
+
+                        animContainer.addView(svgaImageView, 0, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300));
+
+                        SVGADrawable svgaDrawable = new SVGADrawable(svgaVideoEntity);
+                        svgaImageView.setImageDrawable(svgaDrawable);
+
+                        animator.start();
+                    }
+
+                    @Override
+                    public void onError() {
+                        Log.d("PrimaryViewFragment", "onError: ");
+                    }
+                });
+            }
+        });
     }
 
 }

@@ -6,10 +6,18 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/container_primary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_svga"
+            android:text="展示SVGA"
+            android:onClick="onClickShowSVGA"
+            android:layout_width="match_parent"
+            android:layout_height="36dp" />
 
         <TextView
             android:id="@+id/tv_hook"
