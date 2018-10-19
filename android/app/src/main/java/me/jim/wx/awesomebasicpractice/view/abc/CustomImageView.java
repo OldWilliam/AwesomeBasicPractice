@@ -64,8 +64,12 @@ public class CustomImageView extends View {
         mPaint.setTextSize(mTextSize);
         mPaint.getTextBounds(mDesc, 0, mDesc.length(), mTextBound);
 
-        int width = resolveSize(Math.max(mTextBound.width(), mImage.getWidth()), widthMeasureSpec);
-        int height = resolveSize(mTextBound.height() + mImage.getHeight(), heightMeasureSpec);
+        int width = 0;
+        int height = 0;
+        if (mImage != null) {
+            width = resolveSize(Math.max(mTextBound.width(), mImage.getWidth()), widthMeasureSpec);
+            height = resolveSize(mTextBound.height() + mImage.getHeight(), heightMeasureSpec);
+        }
 
         setMeasuredDimension(width, height);
     }
