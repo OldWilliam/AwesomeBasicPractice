@@ -190,18 +190,6 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dp" />
 
-        <me.jim.wx.awesomebasicpractice.view.abc.CustomImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <me.jim.wx.awesomebasicpractice.view.abc.CustomImageView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content" />
-
-        <me.jim.wx.awesomebasicpractice.view.abc.CustomImageView
-            android:layout_width="60dp"
-            android:layout_height="40dp" />
-
         <me.jim.wx.awesomebasicpractice.view.abc.CustomCircleBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

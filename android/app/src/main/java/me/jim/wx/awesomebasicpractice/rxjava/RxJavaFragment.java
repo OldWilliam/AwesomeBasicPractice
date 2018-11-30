@@ -16,6 +16,7 @@ import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonOne;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonThree;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonTwo;
+import me.jim.wx.awesomebasicpractice.rxjava.abc.SubscriberRequest;
 
 /**
  * 练习RxJava
@@ -65,5 +66,7 @@ public class RxJavaFragment extends Fragment {
         LessonTwo.ins().caseFive();
         LessonTwo.ins().caseSix();
         LessonOne.ins().caseEmpty();
+
+        SubscriberRequest.ins();
     }
 }

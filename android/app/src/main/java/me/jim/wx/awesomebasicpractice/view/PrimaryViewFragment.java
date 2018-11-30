@@ -51,8 +51,6 @@ public class PrimaryViewFragment extends Fragment {
         initFlowLayout(view);
         /*shape 实现圆形进度条*/
         initProgressView(view);
-        /*TextureView使用*/
-        initTextureView(view);
         /*RadioButton*/
         initRadioButton(view);
         /*扩展动画View*/
@@ -88,39 +86,6 @@ public class PrimaryViewFragment extends Fragment {
     private void initRadioButton(View view) {
         RadioButton button = view.findViewById(R.id.radiobutton);
         button.setButtonDrawable(null);
-    }
-
-    private void initTextureView(View view) {
-        TextureView textureView = view.findViewById(R.id.textureview);
-        final Camera camera = Camera.open();
-        textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                try {
-                    camera.setPreviewTexture(surface);
-                    camera.startPreview();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-            }
-
-            @Override
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                camera.stopPreview();
-                camera.release();
-                return true;
-            }
-
-            @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-            }
-        });
     }
 
     private void initProgressView(View view) {

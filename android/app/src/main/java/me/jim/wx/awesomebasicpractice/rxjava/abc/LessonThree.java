@@ -1,5 +1,6 @@
 package me.jim.wx.awesomebasicpractice.rxjava.abc;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import java.util.concurrent.TimeUnit;
@@ -20,7 +21,8 @@ import io.reactivex.functions.Predicate;
  *
  * 操作符
  */
-
+@SuppressWarnings({"Convert2Lambda", "RedundantThrows", "DanglingJavadoc"})
+@SuppressLint("CheckResult")
 public class LessonThree {
     private static final LessonThree ourInstance = new LessonThree();
     private static final String TAG = "LessonThree";
@@ -74,6 +76,7 @@ public class LessonThree {
      * repeat、repeatUtil、repeatWhen
      * 在onCompleted事件后调用
      */
+    @SuppressLint("CheckResult")
     public void caseSix() {
         Observable.just(421)
                 .repeat(3)
@@ -118,6 +121,7 @@ public class LessonThree {
     /**
      * take、takeLast、takeUtil、takeWhile
      */
+    @SuppressLint("CheckResult")
     public void caseFour() {
         Observable.range(0, 20)
                 //前10个
@@ -173,6 +177,7 @@ public class LessonThree {
      * <p>
      * 等同于merge、concat、zip
      */
+    @SuppressLint("CheckResult")
     public void caseThree() {
         /**
          * caseOne: 1,2,3
