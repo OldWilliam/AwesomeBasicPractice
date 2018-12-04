@@ -1,5 +1,2 @@
-include ':app', ':AnnotationCompiler', ':Annotations'
-
-project(':AnnotationCompiler').projectDir = new File('../android/AnnotationCompiler')
-
+include ':app'
 rootProject.name = 'android'
