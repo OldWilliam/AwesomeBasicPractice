@@ -65,7 +65,7 @@ dependencies {
     annotationProcessor project(':AnnotationCompiler')
     implementation project(path: ':Annotations')
 
-    compile 'com.github.yyued:SVGAPlayer-Android:2.1.1'
+    implementation 'com.github.yyued:SVGAPlayer-Android:2.3.0'
 }
 
 //AndroidAopDemo.build.gradle

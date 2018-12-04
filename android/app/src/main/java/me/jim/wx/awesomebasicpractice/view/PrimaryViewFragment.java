@@ -198,7 +198,7 @@ public class PrimaryViewFragment extends Fragment {
 
 
                 SVGAParser svgaParser = new SVGAParser(getContext());
-                svgaParser.parse("first_blood.svga", new SVGAParser.ParseCompletion() {
+                svgaParser.parse("xiexie.svga", new SVGAParser.ParseCompletion() {
                     @Override
                     public void onComplete(SVGAVideoEntity svgaVideoEntity) {
 
