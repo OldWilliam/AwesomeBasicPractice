@@ -3,6 +3,10 @@ package me.jim.wx.awesomebasicpractice;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+
+import me.jim.wx.awesomebasicpractice.reactnative.MyReactActivity;
+import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
 public class SplashActivity extends Activity {
 
