@@ -1,4 +1,4 @@
-package me.jim.wx.annotationcompiler;
+package me.jim.wx.javamoduleexample;
 
 import com.google.auto.service.AutoService;
 
@@ -12,7 +12,7 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 
-import me.jim.wx.annotations.PrinterAnnotation;
+import me.jim.wx.annotations.MyAnnotation;
 
 /**
  * Created by wx on 2018/5/2.
@@ -23,7 +23,7 @@ public class AnnotationProcessorExample extends AbstractProcessor {
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        for (Element element: roundEnv.getElementsAnnotatedWith(PrinterAnnotation.class)) {
+        for (Element element: roundEnv.getElementsAnnotatedWith(MyAnnotation.class)) {
             if (element.getKind() == ElementKind.CLASS) {
                 System.out.printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.printf(element.getSimpleName().toString());
@@ -40,7 +40,7 @@ public class AnnotationProcessorExample extends AbstractProcessor {
     @Override
     public Set<String> getSupportedAnnotationTypes() {
         Set<String> annotations = new LinkedHashSet<>();
-        annotations.add(PrinterAnnotation.class.getCanonicalName());
+        annotations.add(MyAnnotation.class.getCanonicalName());
         return annotations;
     }
 }
