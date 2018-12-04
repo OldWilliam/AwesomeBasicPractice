@@ -48,8 +48,6 @@ dependencies {
     //okhttp
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
-    //react-native
-    implementation 'com.facebook.react:react-native:+'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
