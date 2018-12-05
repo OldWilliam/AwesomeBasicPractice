@@ -1,11 +1,17 @@
 package me.jim.wx.awesomebasicpractice.view;
 
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -23,13 +29,14 @@ import java.io.IOException;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.other.aspect.VisitorAnnotation;
-import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
 /**
  * 自定义View练习
  */
 public class PrimaryViewFragment extends Fragment {
+
+    private static final int REQUEST_CODE_CAMERA = 100;
 
     public static Fragment newInstance() {
         return new PrimaryViewFragment();
@@ -52,7 +59,7 @@ public class PrimaryViewFragment extends Fragment {
         /*shape 实现圆形进度条*/
         initProgressView(view);
         /*TextureView使用*/
-        initTextureView(view);
+        initTextureView();
         /*RadioButton*/
         initRadioButton(view);
         /*扩展动画View*/
@@ -90,8 +97,38 @@ public class PrimaryViewFragment extends Fragment {
         button.setButtonDrawable(null);
     }
 
-    private void initTextureView(View view) {
-        TextureView textureView = view.findViewById(R.id.textureview);
+    private void initTextureView() {
+
+        Activity context = getActivity();
+        if (context == null) {
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.CAMERA)) {
+//
+//            }else {
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+//            }
+        }else {
+            realInitTextureView();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //success granted
+                realInitTextureView();
+            }else {
+                //fail denied
+            }
+        }
+    }
+
+    private void realInitTextureView() {
+        TextureView textureView = getView().findViewById(R.id.textureview);
         final Camera camera = Camera.open();
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override

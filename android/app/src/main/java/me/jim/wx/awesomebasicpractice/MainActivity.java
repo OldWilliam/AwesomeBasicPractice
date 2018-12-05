@@ -1,11 +1,14 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+
+import java.util.function.Consumer;
 
 import me.jim.wx.awesomebasicpractice.graphic.GraphicFragment;
 import me.jim.wx.awesomebasicpractice.other.OtherFragment;
@@ -90,5 +93,16 @@ public class MainActivity extends AppCompatActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        getSupportFragmentManager().getFragments().stream().forEach(new Consumer<Fragment>() {
+            @Override
+            public void accept(Fragment fragment) {
+                fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        });
     }
 }
