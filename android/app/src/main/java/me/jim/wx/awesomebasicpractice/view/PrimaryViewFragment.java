@@ -1,14 +1,20 @@
 package me.jim.wx.awesomebasicpractice.view;
 
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.TextPaint;
 import android.util.Log;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -21,6 +27,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.opensource.svgaplayer.SVGACallback;
 import com.opensource.svgaplayer.SVGADrawable;
 import com.opensource.svgaplayer.SVGADynamicEntity;
@@ -43,6 +56,8 @@ import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
  */
 public class PrimaryViewFragment extends Fragment {
 
+    private static final int REQUEST_CODE_CAMERA = 100;
+
     public static Fragment newInstance() {
         return new PrimaryViewFragment();
     }
@@ -64,7 +79,7 @@ public class PrimaryViewFragment extends Fragment {
         /*shape 实现圆形进度条*/
         initProgressView(view);
         /*TextureView使用*/
-        initTextureView(view);
+        initTextureView();
         /*RadioButton*/
         initRadioButton(view);
         /*扩展动画View*/
@@ -104,8 +119,38 @@ public class PrimaryViewFragment extends Fragment {
         button.setButtonDrawable(null);
     }
 
-    private void initTextureView(View view) {
-        TextureView textureView = view.findViewById(R.id.textureview);
+    private void initTextureView() {
+
+        Activity context = getActivity();
+        if (context == null) {
+            return;
+        }
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.CAMERA)) {
+//
+//            }else {
+                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+//            }
+        }else {
+            realInitTextureView();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_CAMERA) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //success granted
+                realInitTextureView();
+            }else {
+                //fail denied
+            }
+        }
+    }
+
+    private void realInitTextureView() {
+        TextureView textureView = getView().findViewById(R.id.textureview);
         final Camera camera = Camera.open();
         textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
@@ -210,7 +255,7 @@ public class PrimaryViewFragment extends Fragment {
                 }
                 svgaParser.parse(url, new SVGAParser.ParseCompletion() {
                     @Override
-                    public void onComplete(SVGAVideoEntity svgaVideoEntity) {
+                    public void onComplete(final SVGAVideoEntity svgaVideoEntity) {
 
                         int width = (int) svgaVideoEntity.getVideoSize().getWidth();
                         int height = (int) svgaVideoEntity.getVideoSize().getHeight();
@@ -220,11 +265,26 @@ public class PrimaryViewFragment extends Fragment {
                         DateHornerModel model = new DateHornerModel();
                         model.nick = "宇智波佐助";
                         model.ptr = "http://img.ikstatic.cn/MTU0MTA1NjY4NjgwMyMxMSNqcGc=.jpg";
-                        model.res = "http://img.ikstatic.cn/MTU0NTUzOTA3NjA0NSM1MTIjanBn.jpg";
+//                        model.res = "http://img.ikstatic.cn/MTU0NTUzOTA3NjA0NSM1MTIjanBn.jpg";
+                        model.res = "http://img.ikstatic.cn/MTU0NTczMDQ5MTMyMiM4NDgjanBn.jpg";
 
-                        SVGADrawable svgaDrawable = new SVGADrawable(svgaVideoEntity, getSvgaDynamicEntity(model, new Random().nextBoolean()));
-                        svgaImageView.setImageDrawable(svgaDrawable);
-                        svgaImageView.startAnimation();
+                        final SVGADynamicEntity svgaDynamicEntity = getSvgaDynamicEntity(model, false);
+
+                        Fresco.initialize(getContext());
+                        Fresco.getImagePipeline().fetchDecodedImage(ImageRequest.fromUri(model.res), getContext()).subscribe(new BaseBitmapDataSubscriber() {
+                            @Override
+                            protected void onNewResultImpl(@javax.annotation.Nullable Bitmap bitmap) {
+                                svgaDynamicEntity.setDynamicImage(bitmap, "hat01");
+                                SVGADrawable svgaDrawable = new SVGADrawable(svgaVideoEntity, svgaDynamicEntity);
+                                svgaImageView.setImageDrawable(svgaDrawable);
+                                svgaImageView.startAnimation();
+                            }
+
+                            @Override
+                            protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
+                                Log.d("PrimaryViewFragment", "onFailureImpl: ");
+                            }
+                        }, CallerThreadExecutor.getInstance());
                     }
 
                     @Override
@@ -243,11 +303,11 @@ public class PrimaryViewFragment extends Fragment {
 
         dynamicEntity.setDynamicImage(model.ptr, "photo01");
 
-        if (isMvp) {
-            dynamicEntity.setDynamicImage(model.res, "mvpk");
-        } else {
-            dynamicEntity.setDynamicImage(model.res, "hat01");
-        }
+//        if (isMvp) {
+//            dynamicEntity.setDynamicImage(model.res, "mvpk");
+//        } else {
+//            dynamicEntity.setDynamicImage(model.res, "hat01");
+//        }
 
         TextPaint textPaint = new TextPaint();
         textPaint.setTextSize(26);
