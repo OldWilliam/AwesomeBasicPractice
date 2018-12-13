@@ -10,18 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonOne;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonThree;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonTwo;
-import me.jim.wx.awesomebasicpractice.rxjava.abc.SubscriberRequest;
 
 /**
  * 练习RxJava
@@ -71,7 +65,5 @@ public class RxJavaFragment extends Fragment {
         LessonTwo.ins().caseFive();
         LessonTwo.ins().caseSix();
         LessonOne.ins().caseEmpty();
-
-        SubscriberRequest.ins();
     }
 }

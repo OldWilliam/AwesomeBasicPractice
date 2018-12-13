@@ -11,6 +11,10 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.widget.commentview.StepView
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
         <TextView
             android:id="@+id/tv_hook"
             android:layout_width="100dp"
