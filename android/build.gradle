@@ -5,10 +5,18 @@ buildscript {
     repositories {
         google()
         jcenter()
+
+        maven {
+            url uri("./repo/")
+        }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath 'org.aspectj:aspectjtools:1.9.1'
+
+        classpath 'me.jim.wx.gradle.plugin:GradlePluginDemo:0.0.1'
+        classpath 'me.jim.wx.gradle.plugin:InjectCodePlugin:0.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -46,7 +54,7 @@ task forceInstallDebug(type: Exec) {
     }
 }
 
-task startApp(type: Exec){
+task startApp(type: Exec) {
     dependsOn 'forceInstallDebug'
     def rootDir = project.rootDir
     def localProperties = new File(rootDir, "local.properties")

@@ -1,0 +1,29 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+
+//https://blog.csdn.net/sbsujjbcy/article/details/50782830
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'com.android.tools.build:gradle:2.3.3'
+    compile "net.bytebuddy:byte-buddy:1.7.9"
+}
+
+repositories {
+    mavenCentral()
+}
+
+//publish code
+
+group = 'me.jim.wx.gradle.plugin'
+version = '0.0.1'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../repo'))
+        }
+    }
+}

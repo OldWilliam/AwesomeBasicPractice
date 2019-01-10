@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
-import me.jim.wx.awesomebasicpractice.other.annotation.ClassPreamble;
 
 /**
  * 其他类型
