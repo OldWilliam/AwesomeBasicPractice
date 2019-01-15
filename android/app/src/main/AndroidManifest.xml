@@ -30,5 +30,17 @@
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
+        <meta-data
+            android:name="xposedmodule"
+            android:value="true" />
+
+        <meta-data
+            android:name="xposeddescription"
+            android:value="xposeddemo1" />
+
+        <meta-data
+            android:name="xposedminversion"
+            android:value="53" />
+
     </application>
 </manifest>

@@ -71,14 +71,16 @@ public class PrimaryViewFragment extends Fragment {
     }
 
     private void initHookView(View view) {
-        TextView tvHook = view.findViewById(R.id.tv_hook);
+        final TextView tvHook = view.findViewById(R.id.tv_hook);
         tvHook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "HAHA", Toast.LENGTH_SHORT).show();
+
+                tvHook.setText("Xposed");
             }
         });
-        HookHelper.hookClickListener(tvHook);
+//        HookHelper.hookClickListener(tvHook);
     }
 
     private void initDrawableView(View view) {
