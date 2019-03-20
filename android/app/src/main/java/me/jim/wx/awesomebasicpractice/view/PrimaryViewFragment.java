@@ -4,6 +4,7 @@ package me.jim.wx.awesomebasicpractice.view;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.os.Bundle;
@@ -12,6 +13,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.PagerSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -30,6 +36,8 @@ import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.CenterLayoutManager;
+import me.jim.wx.awesomebasicpractice.view.recyclerview.LimitLinearSnapHelper;
 
 /**
  * 自定义View练习
@@ -68,6 +76,79 @@ public class PrimaryViewFragment extends Fragment {
         initDrawableView(view);
         /*hook 测试*/
         initHookView(view);
+
+        initWheel(view);
+
+        view.findViewById(R.id.btn_action).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setTranslationY(start += 10);
+            }
+        });
+    }
+
+    int start = 10;
+
+    private void initWheel(final View view) {
+        RecyclerView wheel = view.findViewById(R.id.wheel);
+        wheel.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        wheel.setAdapter(new RecyclerView.Adapter() {
+            @NonNull
+            @Override
+            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                return new WheelViewHolder(View.inflate(getContext(), R.layout.item_wheel, null));
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+                ((WheelViewHolder) viewHolder).setName(i + "");
+                if (i == 0 || i == 1 || i == getItemCount() - 1 || i == getItemCount() - 2) {
+                    viewHolder.itemView.setVisibility(View.INVISIBLE);
+                } else {
+                    viewHolder.itemView.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public int getItemCount() {
+                return 25;
+            }
+        });
+
+        wheel.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.left = 30;
+                outRect.right = 30;
+            }
+        });
+
+        LinearSnapHelper mSnapHelper = new LimitLinearSnapHelper();
+        mSnapHelper.attachToRecyclerView(wheel);
+
+        wheel.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int centerIndex = recyclerView.getChildCount() / 2;
+                View center = recyclerView.getChildAt(centerIndex);
+                View left = recyclerView.getChildAt(centerIndex - 1);
+                View right = recyclerView.getChildAt(centerIndex + 1);
+
+                center.setScaleX(1.5f);
+                center.setScaleY(1.5f);
+                center.setTranslationY(0);
+
+                left.setScaleX(1);
+                left.setScaleY(1);
+                left.setTranslationY(30);
+
+                right.setScaleX(1);
+                right.setScaleY(1);
+                right.setTranslationY(60);
+            }
+        });
     }
 
     private void initHookView(View view) {
@@ -106,9 +187,9 @@ public class PrimaryViewFragment extends Fragment {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.CAMERA)) {
 //
 //            }else {
-                ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+            ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
 //            }
-        }else {
+        } else {
             realInitTextureView();
         }
     }
@@ -117,10 +198,10 @@ public class PrimaryViewFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_CAMERA) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //success granted
                 realInitTextureView();
-            }else {
+            } else {
                 //fail denied
             }
         }
@@ -170,6 +251,16 @@ public class PrimaryViewFragment extends Fragment {
         FlowLayout layout = view.findViewById(R.id.flow_layout);
         for (int i = 0; i < 19; i++) {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
+        }
+    }
+
+    private static class WheelViewHolder extends RecyclerView.ViewHolder {
+        public WheelViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        public void setName(String name) {
+            ((TextView) itemView.findViewById(R.id.tv_name)).setText(name);
         }
     }
 

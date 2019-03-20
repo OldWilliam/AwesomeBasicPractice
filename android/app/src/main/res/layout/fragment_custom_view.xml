@@ -11,6 +11,46 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_value"
+                android:layout_width="100dp"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/btn_action"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:text="action" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/wheel"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp" />
+
+            <View
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/white" />
+
+            <View
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@android:color/white" />
+        </FrameLayout>
+
         <TextView
             android:id="@+id/tv_hook"
             android:layout_width="100dp"
