@@ -78,16 +78,7 @@ public class PrimaryViewFragment extends Fragment {
         initHookView(view);
 
         initWheel(view);
-
-        view.findViewById(R.id.btn_action).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.setTranslationY(start += 10);
-            }
-        });
     }
-
-    int start = 10;
 
     private void initWheel(final View view) {
         RecyclerView wheel = view.findViewById(R.id.wheel);

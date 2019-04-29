@@ -1,5 +1,6 @@
-package me.jim.wx.awesomebasicpractice.widget.commentview;
+package me.jim.wx.awesomebasicpractice.widget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -33,6 +34,7 @@ public class CommentsBar extends LinearLayout {
         return true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
