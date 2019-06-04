@@ -1,6 +1,9 @@
 package me.jim.wx.awesomebasicpractice;
 
 import android.app.Application;
+import android.content.Context;
+
+import com.didi.virtualapk.PluginManager;
 
 import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
@@ -14,5 +17,11 @@ public class BasicApplication extends Application{
     public void onCreate() {
         super.onCreate();
         ContextHelper.init(this);
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        PluginManager.getInstance(base).init();
     }
 }
