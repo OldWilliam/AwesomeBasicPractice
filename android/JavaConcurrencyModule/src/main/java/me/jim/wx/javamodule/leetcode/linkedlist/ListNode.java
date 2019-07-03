@@ -7,9 +7,9 @@ package me.jim.wx.javamodule.leetcode.linkedlist;
  */
 public class ListNode {
     int val;
-    ListNode next;
+    public ListNode next;
 
-    ListNode(int x) {
+    public ListNode(int x) {
         val = x;
     }
 }
