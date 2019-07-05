@@ -1,2 +1,2 @@
-include ':app', ':JavaConcurrencyModule'
+include ':app', ':JavaModule'
 rootProject.name = 'android'
