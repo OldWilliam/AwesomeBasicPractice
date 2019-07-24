@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Date: 2019/6/26
  * Name: wx
- * Description:
+ * Description: 对称二叉树
  */
 public class SymmetricTree {
     public boolean isSymmetric(TreeNode root) {
