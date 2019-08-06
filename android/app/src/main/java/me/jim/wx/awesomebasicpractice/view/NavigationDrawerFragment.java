@@ -57,7 +57,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 2;
+    private int mCurrentSelectedPosition = 6;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -110,7 +110,8 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section2),
                         getString(R.string.title_section3),
                         getString(R.string.title_section4),
-                        getString(R.string.title_section5)
+                        getString(R.string.title_section5),
+                        "DataBinding"
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;

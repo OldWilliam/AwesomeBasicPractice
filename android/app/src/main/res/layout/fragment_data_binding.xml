@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="me.jim.wx.awesomebasicpractice.HelloViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".DataBindingFragment"
+        tools:ignore="HardcodedText">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.name}"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/editText"
+            app:layout_constraintBottom_toBottomOf="@id/editText"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/editText"
+            app:layout_constraintTop_toTopOf="@id/editText" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{viewModel.name}"
+            android:textSize="13sp"
+            app:addTextChangedListener="@{viewModel.textWatcher}"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintLeft_toRightOf="@id/textView"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="62dp"
+            android:onClick="@{viewModel::onClickRead}"
+            android:text="读取"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@id/textView"
+            app:layout_constraintTop_toBottomOf="@id/editText" />
+
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="62dp"
+            android:onClick="@{viewModel::onClickWrite}"
+            android:text="写入"
+            app:layout_constraintLeft_toLeftOf="@id/editText"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editText" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
