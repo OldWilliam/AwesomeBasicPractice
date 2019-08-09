@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import me.jim.wx.annotations.GenLayout;
 import me.jim.wx.annotations.PrinterAnnotation;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
@@ -31,15 +34,24 @@ public class OtherFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+    @GenLayout(R.layout.fragment_other)
+    public View mView;
+
+    @BindView(R.id.tv_annotation_type)
+    public View tv1;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_other, container, false);
+        LayoutKnife.bind(this, getContext());
+        ButterKnife.bind(this, mView);
+        return mView;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        view.findViewById(R.id.tv_annotation_type).setOnClickListener(new View.OnClickListener() {
+        tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), AnnotationManager.ins().getClassAnnotation(AnnotationManager.class), Toast.LENGTH_SHORT).show();

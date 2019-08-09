@@ -5,6 +5,8 @@ import org.aspectj.tools.ajc.Main
 
 apply plugin: 'com.android.application'
 
+apply plugin: 'com.jakewharton.butterknife'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -15,8 +17,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters "armeabi-v7a", "x86"
+            abiFilters "armeabi-v7a"
         }
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,6 +31,12 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
 }
 
 dependencies {
@@ -65,7 +74,10 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.8+'
 
     annotationProcessor project(':AnnotationCompiler')
-    compile project(path: ':Annotations')
+    implementation project(path: ':Annotations')
+
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 }
 
 //AndroidAopDemo.build.gradle
@@ -82,7 +94,7 @@ android.applicationVariants.all { variant ->
     javaCompile.doLast {
         String bootclasspath = project.android.bootClasspath.join(File.pathSeparator)
         //ajc是一个函数，位于utils.gradle中
-        ajc(bootclasspath, javaCompile)
+//        ajc(bootclasspath, javaCompile)
     }
 }
 

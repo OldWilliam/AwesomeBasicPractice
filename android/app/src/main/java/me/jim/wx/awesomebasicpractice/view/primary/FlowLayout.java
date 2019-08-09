@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by wx on 2017/11/26.
  *
