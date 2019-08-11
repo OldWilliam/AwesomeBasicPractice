@@ -100,6 +100,7 @@ public class AnnotationProcessorExample extends AbstractProcessor {
 
                 Element enclosingElement = element.getEnclosingElement();//上一层级的元素
 
+                System.out.println(enclosingElement.toString());
                 String name = enclosingElement.getSimpleName().toString();
 
 

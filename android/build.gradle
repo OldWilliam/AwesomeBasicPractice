@@ -6,6 +6,11 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
+
+        //本地maven仓库
+        maven {
+            url uri("./repo/")
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
@@ -13,7 +18,10 @@ buildscript {
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+//        classpath 'com.jakewharton:butterknife-gradle-plugin:8.4.0'
+
+        //包名+module名+version
+        classpath 'me.jim.wx.layoutknife.plugin:layoutknife-gradle-plugin:0.0.2'
     }
 }
 

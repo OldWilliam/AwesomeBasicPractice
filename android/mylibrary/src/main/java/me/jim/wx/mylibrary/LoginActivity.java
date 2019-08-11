@@ -34,6 +34,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import me.jim.wx.annotations.GenLayout;
+import me.jim.wx.awesomebasicpractice.other.LayoutKnife;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -60,18 +61,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    @BindView(R2.id.email)
-     AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
 
-    private View root;
+    @GenLayout(R3.layout.activity_login)
+    public View root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        LayoutKnife.bind(this, this);
+        setContentView(root);
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();

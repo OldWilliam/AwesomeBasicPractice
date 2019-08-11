@@ -1,3 +1,3 @@
-include ':app', ':layoutknife-compiler', ':layoutknife-annotations', ':mylibrary', ':layoutknife-gradle-plugin'
+include ':app', ':layoutknife-compiler', ':layoutknife-annotations', ':layoutknife-gradle-plugin', ':mylibrary', ':layoutknife'
 
 rootProject.name = 'android'
