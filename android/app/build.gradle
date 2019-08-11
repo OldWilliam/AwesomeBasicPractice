@@ -73,8 +73,8 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation 'org.aspectj:aspectjrt:1.8+'
 
-    annotationProcessor project(':AnnotationCompiler')
-    implementation project(path: ':Annotations')
+    annotationProcessor project(':layoutknife-compiler')
+    implementation project(path: ':layoutknife-annotations')
 
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
