@@ -4,14 +4,17 @@ package me.jim.wx.awesomebasicpractice.view;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -24,9 +27,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 import me.jim.wx.awesomebasicpractice.R;
+import me.jim.wx.awesomebasicpractice.camera.CameraPreview;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
@@ -37,6 +39,8 @@ import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 public class PrimaryViewFragment extends Fragment {
 
     private static final int REQUEST_CODE_CAMERA = 100;
+    private Handler uiHandler = new Handler(Looper.getMainLooper());
+
 
     public static Fragment newInstance() {
         return new PrimaryViewFragment();
@@ -69,6 +73,8 @@ public class PrimaryViewFragment extends Fragment {
         /*hook 测试*/
         initHookView(view);
     }
+
+    private static final String TAG = "PrimaryViewFragment";
 
     private void initHookView(View view) {
         TextView tvHook = view.findViewById(R.id.tv_hook);
@@ -128,35 +134,10 @@ public class PrimaryViewFragment extends Fragment {
 
     private void realInitTextureView() {
         TextureView textureView = getView().findViewById(R.id.textureview);
-        final Camera camera = Camera.open();
-        textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                try {
-                    camera.setPreviewTexture(surface);
-                    camera.startPreview();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+        CameraPreview cameraPreview = new CameraPreview(getContext(), textureView, (View) textureView.getParent());
+        cameraPreview.startCamera();
 
-            }
-
-            @Override
-            public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                camera.stopPreview();
-                camera.release();
-                return true;
-            }
-
-            @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
-            }
-        });
     }
 
     private void initProgressView(View view) {

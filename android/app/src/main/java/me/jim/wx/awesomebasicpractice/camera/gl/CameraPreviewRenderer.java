@@ -1,15 +1,17 @@
-package me.jim.wx.javamodule.sort;
+package me.jim.wx.awesomebasicpractice.camera.gl;
 
-import java.lang.reflect.Proxy;
-import java.util.Collections;
-import java.util.Locale;
+import android.content.Context;
+import android.graphics.SurfaceTexture;
+import android.view.TextureView;
+
 
 /**
- * 思想：冒泡排序扫描一趟最多才调整一个逆序，可以想法让一趟多调整些逆序数字
- * 方法；找个数，小的放这数前面，大的放后面，就可以一趟调整多个逆序了
- * 关键词：递归、枢轴、子序列
+ * Example renderer that changes colors and tones of camera feed
+ * based on touch position.
  */
-class QuickSort implements SortMain.ISort {
+public class CameraPreviewRenderer extends CameraRenderer
+{
+    private static final String TAG = "CameraPreviewRenderer";
 
     private static final String mVetexShaderString = "//position\n" +
             "attribute vec4 position;\n" +
@@ -55,55 +57,29 @@ class QuickSort implements SortMain.ISort {
             "       vec4 midColor = (stepA-stepB) * (1.0-(radius-factor) * scale) * vec4(1.0, 1.0, 1.0, 1.0);\n" +
             "       gl_FragColor = innerColor + midColor;\n" +
             "}";
+
+
+    /**
+     * By not modifying anything, our default shaders will be used in the assets folder of shadercam.
+     *
+     * Base all shaders off those, since there are some default uniforms/textures that will
+     * be passed every time for the camera coordinates and texture coordinates
+     */
+    public CameraPreviewRenderer(Context context, TextureView textureView, SurfaceTexture previewSurface, int width, int height)
+    {
+        super(context, previewSurface, textureView,width, height, mFragShaderString, mVetexShaderString,false);
+
+        //other setup if need be done here
+    }
+
+    /**
+     * we override {@link #setUniformsAndAttribs()} and make sure to call the super so we can add
+     * our own uniforms to our shaders here. CameraRenderer handles the rest for us automatically
+     */
     @Override
-    public void sort(int[] array) {
-
-        innerSort(array, 0, array.length - 1);
-        System.out.println(mVetexShaderString);
-        System.out.println(mFragShaderString);
+    protected void setUniformsAndAttribs()
+    {
+        super.setUniformsAndAttribs();
     }
 
-    private void innerSort(int[] array, int left, int right) {
-        if (left < right) {//不是while，递归的退出条件，不可再分子列表
-            int pivot = QuickPass(array, left, right);
-            innerSort(array, left, pivot - 1);
-            innerSort(array, pivot + 1, right);
-        }
-
-
-    }
-
-    int QuickPass(int[] array, int left, int right) {
-        int low = left;
-        int high = right;
-        int pivot = array[low];
-
-        while (low < high) {
-            while (array[high] > pivot && high > low) {
-                high--;
-            }
-            if (low < high) {//调整完成了，应当退出，不然会影响后面逻辑
-                array[low] = array[high];
-                low++;
-            } else {
-                break;
-            }
-
-            while (array[low] < pivot && high > low) {
-                low++;
-            }
-            if (low < high) {
-                array[high] = array[low];
-                high--;
-            } else {
-                break;
-            }
-        }
-        array[low] = pivot;
-        for (int anArray : array) {
-            System.out.print(String.format(Locale.US, "%2d ", anArray));
-        }
-        System.out.println();
-        return low;
-    }
 }

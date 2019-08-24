@@ -1,4 +1,4 @@
-package me.jim.wx.javamodule;
+package me.jim.wx.javamodule.concurrent;
 
 /**
  * 并行vs串行处理速度

@@ -1,6 +1,8 @@
 package me.jim.wx.javamodule.leetcode.tree;
 
 
+import me.jim.wx.javamodule.model.TreeNode;
+
 /**
  * Date: 2019/6/20
  * Name: wx

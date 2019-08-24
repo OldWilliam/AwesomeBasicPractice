@@ -3,6 +3,8 @@ package me.jim.wx.javamodule.leetcode.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.jim.wx.javamodule.model.TreeNode;
+
 /**
  * Date: 2019/6/26
  * Name: wx

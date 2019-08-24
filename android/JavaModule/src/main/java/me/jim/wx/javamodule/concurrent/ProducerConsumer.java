@@ -1,4 +1,4 @@
-package me.jim.wx.javamodule;
+package me.jim.wx.javamodule.concurrent;
 
 import java.util.Stack;
 

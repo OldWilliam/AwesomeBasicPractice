@@ -9,7 +9,7 @@ import java.util.Locale;
  *
  * 1、每个子堆都是大顶堆
  */
-public class HeapSort implements SortMain.Sort {
+public class HeapSort implements SortMain.ISort {
     @Override
     public void sort(int[] array) {
 

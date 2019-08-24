@@ -5,7 +5,7 @@ package me.jim.wx.javamodule.sort;
  * Name: wx
  * Description:
  */
-class BubbleSort implements SortMain.Sort {
+class BubbleSort implements SortMain.ISort {
     @Override
     public void sort(int[] array) {
         //外层遍历只需n-1次

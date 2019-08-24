@@ -1,4 +1,4 @@
-package me.jim.wx.javamodule.leetcode.linkedlist;
+package me.jim.wx.javamodule.model;
 
 /**
  * Date: 2019/6/20
@@ -6,7 +6,7 @@ package me.jim.wx.javamodule.leetcode.linkedlist;
  * Description:
  */
 public class ListNode {
-    int val;
+    public int val;
     public ListNode next;
 
     public ListNode(int x) {

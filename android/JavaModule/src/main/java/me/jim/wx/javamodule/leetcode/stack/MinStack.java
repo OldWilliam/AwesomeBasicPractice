@@ -1,10 +1,6 @@
 package me.jim.wx.javamodule.leetcode.stack;
 
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Stack;
-
-import jdk.nashorn.internal.ir.IdentNode;
 
 /**
  * Date: 2019/6/21

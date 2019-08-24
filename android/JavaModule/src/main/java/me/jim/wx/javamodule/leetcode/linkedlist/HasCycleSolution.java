@@ -1,5 +1,7 @@
 package me.jim.wx.javamodule.leetcode.linkedlist;
 
+import me.jim.wx.javamodule.model.ListNode;
+
 /**
  * Date: 2019/6/20
  * Name: wx

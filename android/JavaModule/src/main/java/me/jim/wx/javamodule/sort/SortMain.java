@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class SortMain {
     public static void main(String[] args) {
-        int count = 20;
+        int count = 10;
         int[] input = new int[count];
         for (int i = 0; i < count; i++) {
             int anInt = new Random().nextInt(100);
@@ -23,7 +23,7 @@ public class SortMain {
         }
         System.out.println("\n");
 
-        Sort sort = new HeapSort();
+        ISort sort = new QuickSort();
         sort.sort(input);
 
         System.out.println("\n输出：");
@@ -32,7 +32,7 @@ public class SortMain {
         }
     }
 
-    interface Sort {
+    interface ISort {
         void sort(int[] array);
 
         default void swap(int i, int j, int[] array) {

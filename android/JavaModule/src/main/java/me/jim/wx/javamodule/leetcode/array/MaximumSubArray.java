@@ -60,10 +60,6 @@ public class MaximumSubArray {
             res = Math.max(res, nums[i]);
         }
 
-        for (int anInt : nums) {
-            System.out.println(anInt);
-        }
-
         return res;
     }
 }

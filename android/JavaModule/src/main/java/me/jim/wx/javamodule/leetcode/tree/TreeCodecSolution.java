@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import me.jim.wx.javamodule.model.TreeNode;
+
 /**
  * Date: 2019/7/5
  * Name: wx
