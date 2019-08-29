@@ -11,6 +11,11 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <android.opengl.GLSurfaceView
+            android:id="@+id/gl_view"
+            android:layout_width="300dp"
+            android:layout_height="300dp" />
+
         <TextView
             android:id="@+id/tv_hook"
             android:layout_width="100dp"

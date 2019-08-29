@@ -4,17 +4,15 @@ package me.jim.wx.awesomebasicpractice.view;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.HandlerThread;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.util.Printer;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -27,9 +25,13 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.camera.CameraPreview;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
+import me.jim.wx.awesomebasicpractice.opengl.SurfaceRender;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
@@ -72,6 +74,13 @@ public class PrimaryViewFragment extends Fragment {
         initDrawableView(view);
         /*hook 测试*/
         initHookView(view);
+
+        initGlView(view);
+    }
+
+    private void initGlView(View view) {
+        final GLSurfaceView glView = view.findViewById(R.id.gl_view);
+        glView.setRenderer(new SurfaceRender());
     }
 
     private static final String TAG = "PrimaryViewFragment";

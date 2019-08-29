@@ -32,14 +32,14 @@ public class FindKthLargest {
         int right = nums.length - 1;
 
         while (true) {
-            int pivot = qkPass(nums, left, right);
-            if (pivot > k - 1) {
-                right = pivot - 1;
+            int mid  = qkPass(nums, left, right);
+            if (mid > k - 1) {
+                right = mid - 1;
             }
-            if (pivot < k - 1) {
-                left = pivot + 1;
+            if (mid < k - 1) {
+                left = mid + 1;
             }
-            if (pivot == k - 1) {
+            if (mid == k - 1) {
                 break;
             }
         }
