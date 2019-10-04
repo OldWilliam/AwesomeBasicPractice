@@ -1,6 +1,7 @@
 package me.jim.wx.awesomebasicpractice.rxjava;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -63,7 +59,10 @@ public class RxJavaFragment extends Fragment {
                 .subscribe(new Consumer<String>() {
                     @Override
                     public void accept(String s) throws Exception {
-                        Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                        Context context = getContext();
+                        if (context != null) {
+                            Toast.makeText(null, s, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 

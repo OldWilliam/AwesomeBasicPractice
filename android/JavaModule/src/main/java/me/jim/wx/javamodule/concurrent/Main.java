@@ -1,28 +1,52 @@
 package me.jim.wx.javamodule.concurrent;
 
+import java.util.LinkedList;
+import java.util.concurrent.Semaphore;
+
 /**
  * Date: 2019/8/16
  * Name: wx
  * Description:
  */
 public class Main {
-    public static void main(String[] args) {
-        Solution solution = new Solution();
-        int res[] = new int[1];
-        System.out.println(solution.add(10, res));
-        System.out.println(res[0]);
+    static final Semaphore semaphore = new Semaphore(3);
+
+
+    public static void main(String[] args) throws InterruptedException {
+        LinkedList<Object> objects = new LinkedList<>();
+        objects.add(1);
+        objects.remove("");
+
+        synchronized (semaphore) {
+            System.out.println("Before");
+            objects.wait();
+            System.out.println("After");
+
+        }
+
+        new Stub2();
     }
 
-    static class Solution{
-        public int add(int i, int[] res) {
-            if (i == 1) {
-                return 1;
-            }
-            int sum = i + add(i - 1, res);
-            if (sum > 4000) {
-                res[0] = 1;
-            }
-            return sum;
+
+    static class Stub {
+        public String name = "Stub";
+
+        public Stub() {
+            sayName();
+        }
+
+        public void sayName() {
+            System.out.println(name);
+        }
+    }
+
+
+    static class Stub2 extends Stub{
+        public  String name = "Stub2";
+
+        @Override
+        public void sayName() {
+            System.out.println(name);
         }
     }
 }
