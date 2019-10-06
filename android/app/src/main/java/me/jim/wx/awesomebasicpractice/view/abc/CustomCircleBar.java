@@ -61,10 +61,10 @@ public class CustomCircleBar extends View {
 
 
         mPaint.setColor(sweepAngle == 360 ? mOneColor : mTwoColor);
-        canvas.drawCircle(getWidth()/2, getHeight()/2, getWidth()/2-43, mPaint);
+        canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2 - 43, mPaint);
         mPaint.setColor(sweepAngle == 360 ? mTwoColor : mOneColor);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            canvas.drawArc(43,43,getWidth()-43,getHeight()-43,0,sweepAngle,false,mPaint);
+            canvas.drawArc(43, 43, getWidth() - 43, getHeight() - 43, 0, sweepAngle, false, mPaint);
         }
     }
 }

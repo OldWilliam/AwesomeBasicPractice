@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.function.Consumer;
 
@@ -80,5 +82,13 @@ public class MainActivity extends AppCompatActivity
                 fragment.onRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         });
+    }
+
+    private static final String TAG = "MainActivity";
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.e(TAG, "onTouchEvent: " + event.getAction());
+        return super.onTouchEvent(event);
     }
 }

@@ -2,6 +2,7 @@ package me.jim.wx.awesomebasicpractice.recyclerview.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,22 +40,11 @@ public class SimpleView1 extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         inflater.inflate(R.layout.layout_rv_simple_view_1, this);
         recyclerView = findViewById(R.id.rv);
-        recyclerView.setLayoutManager(new ABC1LayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new MyAdapter();
         recyclerView.setAdapter(mAdapter);
 
-        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
-            @Override
-            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
-                datas = beans;
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
-        });
+        fetchData();
 
         SimpleDecor decor = new SimpleDecor();
         Drawable drawable = getContext().getResources().getDrawable(R.drawable.simple_decor);
@@ -65,7 +55,23 @@ public class SimpleView1 extends LinearLayout {
         findViewById(R.id.btn_add).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.notifyItemRemoved(0);
+                fetchData();
+            }
+        });
+    }
+
+    private void fetchData() {
+        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
+            @Override
+            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
+                datas = beans;
+                post(new Runnable() {
+                    @Override
+                    public void run() {
+                        datas.get(1).name = "卫鑫";
+                        mAdapter.notifyItemChanged(1);
+                    }
+                });
             }
         });
     }
