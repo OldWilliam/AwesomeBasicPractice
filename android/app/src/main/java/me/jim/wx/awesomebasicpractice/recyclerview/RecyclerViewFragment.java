@@ -16,12 +16,14 @@ import java.util.List;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.recyclerview.view.SimpleView1;
 import me.jim.wx.awesomebasicpractice.recyclerview.view.SimpleView2;
+import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RecyclerViewFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+@AttachFragment("RecyclerView")
 public class RecyclerViewFragment extends Fragment {
 
 

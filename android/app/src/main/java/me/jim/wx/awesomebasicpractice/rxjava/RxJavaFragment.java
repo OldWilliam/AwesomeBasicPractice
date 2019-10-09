@@ -12,24 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonOne;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonThree;
 import me.jim.wx.awesomebasicpractice.rxjava.abc.LessonTwo;
+import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * 练习RxJava
  */
+@AttachFragment("RxJava")
 public class RxJavaFragment extends Fragment {
     private String TAG = "RxJavaFragment";
-
-    private TextView tvDisplay;
-
-    public static RxJavaFragment newInstance() {
-        RxJavaFragment fragment = new RxJavaFragment();
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +36,7 @@ public class RxJavaFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvDisplay = view.findViewById(R.id.tv_display);
+        TextView tvDisplay = view.findViewById(R.id.tv_display);
         main();
     }
 
@@ -54,7 +50,7 @@ public class RxJavaFragment extends Fragment {
         LessonThree.ins().caseOne().subscribe();
         LessonTwo.ins().caseOne();
         LessonTwo.ins().caseTwo();
-        LessonTwo.ins().caseFour()
+        Disposable subscribe = LessonTwo.ins().caseFour()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<String>() {
                     @Override

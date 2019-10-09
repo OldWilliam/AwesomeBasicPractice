@@ -42,10 +42,12 @@ import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
 import me.jim.wx.awesomebasicpractice.opengl.SurfaceRender;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
+import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * 自定义View练习
  */
+@AttachFragment("初级View")
 public class PrimaryViewFragment extends Fragment {
 
     private static final int REQUEST_CODE_CAMERA = 100;

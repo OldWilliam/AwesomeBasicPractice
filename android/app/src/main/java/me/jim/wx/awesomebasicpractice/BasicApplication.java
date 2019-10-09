@@ -2,15 +2,9 @@ package me.jim.wx.awesomebasicpractice;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Looper;
-import android.os.MessageQueue;
-
-import com.didi.virtualapk.PluginManager;
 
 import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
-import com.github.moduth.blockcanary.BlockCanary;
-import com.github.moduth.blockcanary.BlockCanaryContext;
 
 
 /**

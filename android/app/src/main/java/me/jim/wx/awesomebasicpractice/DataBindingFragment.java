@@ -11,28 +11,11 @@ import me.jim.wx.fragmentannotation.AttachFragment;
 import me.jim.wx.awesomebasicpractice.databinding.FragmentDataBindingBinding;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link DataBindingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-
-@AttachFragment
+@AttachFragment("DataBinding")
 public class DataBindingFragment extends Fragment {
 
     public DataBindingFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment DataBindingFragment.
-     */
-    public static DataBindingFragment newInstance() {
-        DataBindingFragment fragment = new DataBindingFragment();
-        return fragment;
     }
 
     @Override

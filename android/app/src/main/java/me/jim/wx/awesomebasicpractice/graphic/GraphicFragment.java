@@ -36,15 +36,13 @@ import me.jim.wx.awesomebasicpractice.http.ResponseListener;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
+import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * 图形相关
  */
+@AttachFragment("图形")
 public class GraphicFragment extends Fragment {
-    public static GraphicFragment newInstance() {
-        GraphicFragment fragment = new GraphicFragment();
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

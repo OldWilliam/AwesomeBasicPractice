@@ -1,7 +1,14 @@
 package me.jim.wx.fragmentprocessor;
 
 import com.google.auto.service.AutoService;
+import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.CodeBlock;
+import com.squareup.javapoet.FieldSpec;
+import com.squareup.javapoet.JavaFile;
+import com.squareup.javapoet.TypeSpec;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -11,8 +18,11 @@ import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 
+import me.jim.wx.FragmentBinder;
 import me.jim.wx.fragmentannotation.AttachFragment;
 
 
@@ -21,22 +31,46 @@ import me.jim.wx.fragmentannotation.AttachFragment;
 public class FragmentProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        System.out.println("Fuck Me");
+
+
+        FieldSpec nameField = FieldSpec.builder(ClassName.get(ArrayList.class).box(), "names", Modifier.PUBLIC, Modifier.STATIC).build();
+        FieldSpec fragField = FieldSpec.builder(ClassName.get(ArrayList.class).box(), "frags", Modifier.PUBLIC, Modifier.STATIC).build();
+
+        CodeBlock.Builder blockBuilder = CodeBlock.builder();
+        blockBuilder.addStatement("names = new ArrayList<String>()");
+        blockBuilder.addStatement("frags = new ArrayList<String>()");
+
         for (Element element : roundEnv.getElementsAnnotatedWith(AttachFragment.class)) {
-            System.out.println("------------------------------");
             // 判断元素的类型为Class
             if (element.getKind() == ElementKind.CLASS) {
                 // 显示转换元素类型
                 TypeElement typeElement = (TypeElement) element;
                 // 输出元素名称
-                System.out.println(typeElement.getSimpleName());
+                Name qualifiedName = typeElement.getQualifiedName();
                 // 输出注解属性值
-                System.out.println(typeElement.getAnnotation(AttachFragment.class));
-            }
-            System.out.println("------------------------------");
-        }
-        return false;
+                String name = typeElement.getAnnotation(AttachFragment.class).value();
 
+                blockBuilder.addStatement("frags.add($S)", qualifiedName);
+                blockBuilder.addStatement("names.add($S)", name);
+            }
+        }
+
+        TypeSpec typeSpec = TypeSpec.classBuilder(FragmentBinder.FRAGMENT_BINDER_IMPL)
+                .addModifiers(Modifier.PUBLIC)
+                .addField(nameField)
+                .addField(fragField)
+                .addStaticBlock(blockBuilder.build())
+                .build();
+
+        JavaFile javaFile = JavaFile.builder(FragmentBinder.ME_JIM_WX, typeSpec)
+                .build();
+
+        try {
+            javaFile.writeTo(processingEnv.getFiler());
+        } catch (IOException ignored) {
+
+        }
+        return true;
     }
 
     @Override

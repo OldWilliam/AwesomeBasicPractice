@@ -12,16 +12,13 @@ import android.widget.Toast;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
-import me.jim.wx.awesomebasicpractice.other.annotation.ClassPreamble;
+import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * 其他类型
  */
+@AttachFragment("其他")
 public class OtherFragment extends Fragment {
-
-    public static OtherFragment newInstance() {
-        return new OtherFragment();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

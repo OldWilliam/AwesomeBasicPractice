@@ -6,10 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * Date: 2019-10-09
  * Name: wx
- * Description:
+ * Description: Fragment自动添加
  */
 
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 public @interface AttachFragment {
-
+    String value();
 }
