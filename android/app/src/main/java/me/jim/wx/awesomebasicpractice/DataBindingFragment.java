@@ -1,14 +1,13 @@
 package me.jim.wx.awesomebasicpractice;
 
 
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import me.jim.wx.fragmentannotation.AttachFragment;
 import me.jim.wx.awesomebasicpractice.databinding.FragmentDataBindingBinding;
 
 
@@ -17,6 +16,8 @@ import me.jim.wx.awesomebasicpractice.databinding.FragmentDataBindingBinding;
  * Use the {@link DataBindingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+@AttachFragment
 public class DataBindingFragment extends Fragment {
 
     public DataBindingFragment() {

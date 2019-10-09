@@ -1,2 +1,2 @@
-include ':app', ':JavaModule'
+include ':app', ':JavaModule', ':FragmentProcessor', ':FragmentAnnotation'
 rootProject.name = 'android'
