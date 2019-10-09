@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 //apply plugin: 'com.didi.virtualapk.host' //需要升级，不兼容gradle
 
 android {
@@ -68,4 +70,8 @@ dependencies {
     implementation 'com.github.markzhai:blockcanary-android:1.5.0'
 
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }
