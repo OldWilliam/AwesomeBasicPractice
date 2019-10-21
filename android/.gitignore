@@ -10,3 +10,4 @@
 gradle/*
 .idea/*
 libs/
+local.properties
