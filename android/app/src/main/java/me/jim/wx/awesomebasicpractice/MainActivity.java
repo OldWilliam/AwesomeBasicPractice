@@ -10,7 +10,6 @@ import android.util.SparseArray;
 import android.view.MotionEvent;
 
 import me.jim.wx.FragmentBinder;
-import me.jim.wx.awesomebasicpractice.view.NavigationDrawerFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {

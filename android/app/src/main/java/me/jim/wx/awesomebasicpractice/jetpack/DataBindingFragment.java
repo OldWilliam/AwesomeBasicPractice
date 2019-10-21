@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice;
+package me.jim.wx.awesomebasicpractice.jetpack;
 
 
 import android.os.Bundle;

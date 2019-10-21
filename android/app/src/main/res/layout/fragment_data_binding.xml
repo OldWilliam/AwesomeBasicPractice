@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="me.jim.wx.awesomebasicpractice.HelloViewModel" />
+            type="me.jim.wx.awesomebasicpractice.jetpack.HelloViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

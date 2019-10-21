@@ -3,5 +3,5 @@
     <gradient
         android:startColor="@color/colorAccent"
         android:endColor="@color/colorPrimaryDark" />
-    <size android:height="6dp" />
+    <size android:height="6dp" android:width="6dp"/>
 </shape>

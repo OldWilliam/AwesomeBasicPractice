@@ -41,6 +41,7 @@ import me.jim.wx.fragmentannotation.AttachFragment;
 /**
  * 图形相关
  */
+@SuppressWarnings("unused")
 @AttachFragment("图形")
 public class GraphicFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.widget;
+package me.jim.wx.awesomebasicpractice.view.slipconflict;
 
 import android.content.Context;
 import android.util.AttributeSet;

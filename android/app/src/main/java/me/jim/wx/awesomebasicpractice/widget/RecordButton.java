@@ -36,6 +36,7 @@ public class RecordButton extends View {
         super(context, attrs, defStyleAttr);
     }
 
+    @SuppressWarnings("unused")
     public RecordButton(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }

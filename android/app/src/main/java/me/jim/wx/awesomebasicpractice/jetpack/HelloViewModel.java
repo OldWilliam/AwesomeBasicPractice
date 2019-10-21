@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice;
+package me.jim.wx.awesomebasicpractice.jetpack;
 
 import android.app.Activity;
 import android.arch.lifecycle.ViewModel;
@@ -25,7 +25,7 @@ import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 /**
  * Date: 2019/8/1
  * Name: wx
- * Description:
+ * Description: ViewModel初使用
  */
 public class HelloViewModel extends ViewModel {
     public final ObservableField<String> name = new ObservableField<>("");

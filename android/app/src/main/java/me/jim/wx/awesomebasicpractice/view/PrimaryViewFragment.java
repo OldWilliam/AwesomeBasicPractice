@@ -47,14 +47,11 @@ import me.jim.wx.fragmentannotation.AttachFragment;
 /**
  * 自定义View练习
  */
+@SuppressWarnings("unused")
 @AttachFragment("初级View")
 public class PrimaryViewFragment extends Fragment {
 
     private static final int REQUEST_CODE_CAMERA = 100;
-
-    public static Fragment newInstance() {
-        return new PrimaryViewFragment();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

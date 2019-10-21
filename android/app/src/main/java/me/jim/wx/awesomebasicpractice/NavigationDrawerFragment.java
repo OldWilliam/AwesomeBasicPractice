@@ -1,4 +1,4 @@
-package me.jim.wx.awesomebasicpractice.view;
+package me.jim.wx.awesomebasicpractice;
 
 
 import android.app.Activity;
@@ -58,7 +58,7 @@ public class NavigationDrawerFragment extends Fragment {
     private ListView mDrawerListView;
     private View mFragmentContainerView;
 
-    private int mCurrentSelectedPosition = 0;
+    private int mCurrentSelectedPosition = 5;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 

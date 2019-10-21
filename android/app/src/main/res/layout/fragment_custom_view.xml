@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<me.jim.wx.awesomebasicpractice.widget.OuterScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<me.jim.wx.awesomebasicpractice.view.slipconflict.OuterScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
@@ -11,6 +11,10 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.widget.Gallery
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <me.jim.wx.awesomebasicpractice.widget.LikeAnimView
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
@@ -19,7 +23,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"/>
 
-        <me.jim.wx.awesomebasicpractice.widget.HorizontalSlideConflictView
+        <me.jim.wx.awesomebasicpractice.view.slipconflict.HorizontalSlideConflictView
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -29,27 +33,27 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <me.jim.wx.awesomebasicpractice.widget.VerticalSlideConflictView
+                <me.jim.wx.awesomebasicpractice.view.slipconflict.VerticalSlideConflictView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp" />
 
-                <me.jim.wx.awesomebasicpractice.widget.VerticalSlideConflictView
+                <me.jim.wx.awesomebasicpractice.view.slipconflict.VerticalSlideConflictView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp" />
 
-                <me.jim.wx.awesomebasicpractice.widget.VerticalSlideConflictView
+                <me.jim.wx.awesomebasicpractice.view.slipconflict.VerticalSlideConflictView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp" />
 
-                <me.jim.wx.awesomebasicpractice.widget.VerticalSlideConflictView
+                <me.jim.wx.awesomebasicpractice.view.slipconflict.VerticalSlideConflictView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp" />
             </LinearLayout>
-        </me.jim.wx.awesomebasicpractice.widget.HorizontalSlideConflictView>
+        </me.jim.wx.awesomebasicpractice.view.slipconflict.HorizontalSlideConflictView>
 
         <SurfaceView
             android:id="@+id/surfaceView"
@@ -260,4 +264,4 @@
     </LinearLayout>
 
 
-</me.jim.wx.awesomebasicpractice.widget.OuterScrollView>
+</me.jim.wx.awesomebasicpractice.view.slipconflict.OuterScrollView>

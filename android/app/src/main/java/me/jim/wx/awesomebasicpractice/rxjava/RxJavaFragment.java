@@ -23,6 +23,7 @@ import me.jim.wx.fragmentannotation.AttachFragment;
 /**
  * 练习RxJava
  */
+@SuppressWarnings("unused")
 @AttachFragment("RxJava")
 public class RxJavaFragment extends Fragment {
     private String TAG = "RxJavaFragment";
