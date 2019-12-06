@@ -2,10 +2,9 @@ package me.jim.wx.awesomebasicpractice.widget;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
@@ -13,18 +12,19 @@ import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import me.jim.wx.awesomebasicpractice.R;
 
 /**
  * Date: 2019-10-21
  * Name: weixin
- * Description:  左右轮播选择
+ * Description:  左右轮播选择器
  */
 public class Gallery extends FrameLayout {
+
+    private RecyclerView recyclerView;
+
     public Gallery(Context context) {
         super(context);
         init();
@@ -47,26 +47,71 @@ public class Gallery extends FrameLayout {
     }
 
     private void init() {
-        final RecyclerView recyclerView = new RecyclerView(getContext());
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        linearLayoutManager.scrollToPosition(Integer.MAX_VALUE / 2);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(new GalleryAdapter());
+        recyclerView = new RecyclerView(getContext());
 
-        DividerItemDecoration decoration = new DividerItemDecoration(getContext(), LinearLayout.HORIZONTAL);
-        Drawable drawable = getContext().getResources().getDrawable(R.drawable.simple_decor);
-        decoration.setDrawable(drawable);
-        recyclerView.addItemDecoration(decoration);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        layoutManager.scrollToPosition(Integer.MAX_VALUE / 2);
+        recyclerView.setLayoutManager(layoutManager);
 
-        final LinearSnapHelper snapHelper = new LinearSnapHelper();
-        snapHelper.attachToRecyclerView(recyclerView);
+        GalleryAdapter mAdapter = new GalleryAdapter();
+        recyclerView.setAdapter(mAdapter);
 
-        View snapView = snapHelper.findSnapView(linearLayoutManager);
-        int[] snapDistance = snapHelper.calculateDistanceToFinalSnap(linearLayoutManager, snapView);
-        recyclerView.offsetChildrenHorizontal(snapDistance[0]);
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                super.getItemOffsets(outRect, view, parent, state);
+                outRect.left = 30;
+                outRect.right = 30;
+            }
+        });
 
         addView(recyclerView);
+
+        getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                final LinearSnapHelper snapHelper = new LinearSnapHelper();
+                snapHelper.attachToRecyclerView(recyclerView);
+                getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                computeScale();
+            }
+        });
+
+        recyclerView.setMinimumHeight(180 * 3);
+    }
+
+    private void computeScale() {
+
+        int childCount = recyclerView.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            RecyclerView.ViewHolder holder = recyclerView.getChildViewHolder(recyclerView.getChildAt(i));
+            float percent = getPercent(holder.itemView);
+            float factor = 0.6f;
+            if (percent < 1) {
+                holder.itemView.setScaleX(1 - percent * (1 - factor));
+                holder.itemView.setScaleY(1 - percent * (1 - factor));
+            } else {
+                holder.itemView.setScaleY(factor);
+                holder.itemView.setScaleX(factor);
+            }
+        }
+    }
+
+    private float getPercent(View itemView) {
+        float parentCenter = getWidth() / 2;
+
+        float itemCenter = itemView.getLeft() + itemView.getWidth() / 2;
+
+        float du = Math.abs(parentCenter - itemCenter);
+        return du / itemView.getWidth();
     }
 
     private class GalleryAdapter extends RecyclerView.Adapter {
@@ -84,7 +129,8 @@ public class Gallery extends FrameLayout {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            ((TextView) holder.itemView).setText(String.valueOf(position % 10));
+            int index = position % 10;
+            ((TextView) holder.itemView).setText(String.valueOf(index));
         }
 
         @Override
@@ -93,10 +139,9 @@ public class Gallery extends FrameLayout {
         }
     }
 
-    private class GalleryViewHolder extends RecyclerView.ViewHolder {
+    private static class GalleryViewHolder extends RecyclerView.ViewHolder {
         GalleryViewHolder(View itemView) {
             super(itemView);
         }
     }
-
 }

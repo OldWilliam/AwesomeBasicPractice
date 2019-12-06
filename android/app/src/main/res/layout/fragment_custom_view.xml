@@ -13,15 +13,16 @@
 
         <me.jim.wx.awesomebasicpractice.widget.Gallery
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:minHeight="180dp" />
 
         <me.jim.wx.awesomebasicpractice.widget.LikeAnimView
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="300dp" />
 
         <me.jim.wx.awesomebasicpractice.widget.RecordButton
             android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp" />
 
         <me.jim.wx.awesomebasicpractice.view.slipconflict.HorizontalSlideConflictView
 
@@ -58,7 +59,7 @@
         <SurfaceView
             android:id="@+id/surfaceView"
             android:layout_width="match_parent"
-            android:layout_height="600dp"/>
+            android:layout_height="600dp" />
 
         <android.opengl.GLSurfaceView
             android:id="@+id/gl_view"
