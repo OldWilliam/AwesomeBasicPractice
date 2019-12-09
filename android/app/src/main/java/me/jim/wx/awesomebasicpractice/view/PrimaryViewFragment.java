@@ -210,15 +210,29 @@ public class PrimaryViewFragment extends Fragment {
         if (context == null) {
             return;
         }
-        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE};
+        if (checkSelfPermissions(permissions) != PackageManager.PERMISSION_GRANTED) {
 //            if (ActivityCompat.shouldShowRequestPermissionRationale(context, Manifest.permission.CAMERA)) {
 //
 //            }else {
-            ActivityCompat.requestPermissions(context, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_CAMERA);
+
+            ActivityCompat.requestPermissions(context, permissions, REQUEST_CODE_CAMERA);
 //            }
         } else {
             realInitTextureView();
         }
+    }
+
+    private int checkSelfPermissions(String[] permissions) {
+        boolean granted = true;
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                granted = false;
+                break;
+            }
+        }
+        return granted ? PackageManager.PERMISSION_GRANTED : PackageManager.PERMISSION_DENIED;
     }
 
     @Override
@@ -255,5 +269,4 @@ public class PrimaryViewFragment extends Fragment {
             layout.addView(inflater.inflate(R.layout.item_flow, null), 0);
         }
     }
-
 }
