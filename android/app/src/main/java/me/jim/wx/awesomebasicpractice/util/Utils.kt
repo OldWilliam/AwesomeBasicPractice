@@ -7,6 +7,14 @@ import android.content.Context
  * Name: weixin
  * Description: 工具类
  */
-fun dp2Px(context: Context, dip: Int) : Float{
+fun dp2Px(context: Context, dip: Int): Float {
     return context.resources.displayMetrics.density * dip + 0.5f
+}
+
+fun getScreenWidth(context: Context): Int {
+    return context.resources.displayMetrics.widthPixels
+}
+
+fun getScreenHeight(context: Context): Int{
+    return context.resources.displayMetrics.heightPixels
 }

@@ -10,12 +10,16 @@ import android.util.SparseArray;
 import android.view.MotionEvent;
 
 import me.jim.wx.FragmentBinder;
+import me.jim.wx.awesomebasicpractice.util.Utils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Utils.setFullscreen(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 findViewById(R.id.drawer_layout));
+
+
     }
 
     private SparseArray<Fragment> fragments = new SparseArray<>();
