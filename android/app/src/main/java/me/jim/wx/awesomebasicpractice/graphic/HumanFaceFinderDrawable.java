@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,6 +38,7 @@ public class HumanFaceFinderDrawable extends Drawable {
         mHead = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.shape_head)).getBitmap();
         mCard = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.shape_card)).getBitmap();
         mPaint = new Paint();
+        mPaint.setAntiAlias(true);
     }
 
     @Override
@@ -56,21 +58,29 @@ public class HumanFaceFinderDrawable extends Drawable {
         float width = 0.6f * headRect.width();
         float height = mCard.getHeight() * 1.0f / mCard.getWidth() * width;
         float left = (getBounds().width() - width) / 2.0f;
-        float bottom = headRect.bottom - 0.11f * headRect.width();//按比例
+        float bottom = getBounds().bottom - getBounds().height() * (0.22839506f);//按比例
         canvas.drawBitmap(mCard, null, new RectF(left, bottom - height, left + width, bottom), mPaint);
 
+        drawText(canvas, headRect);
+    }
+
+    private void drawText(@NonNull Canvas canvas, RectF cardRect) {
+        mPaint.setColor(Color.WHITE);
+        float textSize = UtilsKt.dp2Px(ContextHelper.getContext(), 16);
+        mPaint.setTextSize(textSize);
+        String text = "请手持身份证，凝视屏幕";
+        float width = mPaint.measureText(text);
+        canvas.drawText(text, (getBounds().width() - width) / 2, cardRect.top - textSize, mPaint);
     }
 
     @NotNull
     private RectF getHeadRectF() {
-        float horizontalPadding = UtilsKt.dp2Px(ContextHelper.getContext(), 10);
+        float horizontalPadding = 0;
         float realWidth = getBounds().width() - horizontalPadding * 2;
         float realHeight = mHead.getHeight() * 1.0f / mHead.getWidth() * realWidth;
 
-        //noinspection UnnecessaryLocalVariable
-        float left = horizontalPadding;//水平居中
-        float top = (getBounds().height() - realHeight) / 2.0f;//垂直居中
-        return new RectF(left, top, left + realWidth, top + realHeight);
+        float top = getBounds().height() * (0.14814815f);
+        return new RectF(0, top, realWidth, top + realHeight);
     }
 
     @Override

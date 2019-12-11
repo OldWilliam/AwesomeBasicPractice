@@ -32,6 +32,7 @@ public class FrontIdCardFinderDrawable extends Drawable {
 
     public FrontIdCardFinderDrawable(Context context) {
         this.mPaint = new Paint();
+        mPaint.setAntiAlias(true);
         mHead = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.cover_card_font_head)).getBitmap();
         mEdge = ((BitmapDrawable) context.getResources().getDrawable(R.drawable.card_edge_line)).getBitmap();
     }

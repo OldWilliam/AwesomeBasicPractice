@@ -2,10 +2,13 @@ package me.jim.wx.awesomebasicpractice.camera;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,6 +27,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -35,14 +41,13 @@ import java.util.List;
 import java.util.Locale;
 
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.graphic.BackIdCardFinderDrawable;
-import me.jim.wx.awesomebasicpractice.graphic.FrontIdCardFinderDrawable;
 import me.jim.wx.awesomebasicpractice.graphic.HumanFaceFinderDrawable;
 import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressWarnings("deprecation")
 @AttachFragment("相机")
 public class CameraFragment extends Fragment implements SurfaceHolder.Callback, View.OnTouchListener, View.OnLongClickListener {
 
@@ -51,6 +56,11 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     private Camera mCamera;
     private SurfaceHolder mHolder;
     private SurfaceView surfaceView;
+    private ImageView preview;
+    private ImageView take;
+
+    private int mCameraCount;
+    private int mCurrentCamId = Camera.CameraInfo.CAMERA_FACING_BACK;
 
     public CameraFragment() {
         // Required empty public constructor
@@ -75,23 +85,163 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         surfaceView.setOnTouchListener(this);
 
         initListener(view);
+
+        preview = view.findViewById(R.id.preview);
+
+        preview.setOnClickListener(v -> preview.setVisibility(View.GONE));
+
+        view.findViewById(R.id.iv_switch).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCamera.stopPreview();
+                mCamera.release();
+
+                try {
+                    prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mCamera.startPreview();
+            }
+        });
     }
 
     private void initListener(@NonNull View view) {
-        view.findViewById(R.id.take).setOnLongClickListener(this);
+        take = view.findViewById(R.id.take);
+        take.setOnLongClickListener(this);
 
         ImageView cover = view.findViewById(R.id.cover);
-        cover.setBackground(new FrontIdCardFinderDrawable(view.getContext()));
+        cover.setBackground(new HumanFaceFinderDrawable(view.getContext()));
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        mHolder = holder;
         try {
-            mCamera = Camera.open();
-            mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
+            prepare();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        mCamera.startPreview();
+    }
+
+    private void prepare() throws IOException {
+        mCameraCount = Camera.getNumberOfCameras();
+        mCurrentCamId = (mCurrentCamId + 1) % mCameraCount;
+        mCamera = Camera.open(mCurrentCamId);
+        mCamera.setPreviewDisplay(mHolder);
+
+        Log.d(TAG, surfaceView.getWidth() + " : " + surfaceView.getHeight());
+
+        int rotation = getDisplayOrientation();
+        mCamera.setDisplayOrientation(rotation);
+
+        Camera.Parameters parameters = mCamera.getParameters();
+        setPreviewSize(parameters);
+        setPictureSize(parameters);
+        parameters.setRotation(isFrontCamera() ? rotation + 180 : rotation);
+        mCamera.setParameters(parameters);
+    }
+
+    /**
+     * 设置保存图片的尺寸
+     */
+    private void setPictureSize(Camera.Parameters mParameters) {
+        List<Camera.Size> localSizes = mParameters.getSupportedPictureSizes();
+        Camera.Size biggestSize = null;
+        Camera.Size fitSize = null;// 优先选预览界面的尺寸
+        Camera.Size previewSize = mParameters.getPreviewSize();//获取预览界面尺寸
+        float previewSizeScale = 0;
+        if (previewSize != null) {
+            previewSizeScale = previewSize.width / (float) previewSize.height;
+        }
+
+        if (localSizes != null) {
+            int cameraSizeLength = localSizes.size();
+            for (int n = 0; n < cameraSizeLength; n++) {
+                Camera.Size size = localSizes.get(n);
+                if (biggestSize == null) {
+                    biggestSize = size;
+                } else if (size.width >= biggestSize.width && size.height >= biggestSize.height) {
+                    biggestSize = size;
+                }
+
+                // 选出与预览界面等比的最高分辨率
+                if (previewSizeScale > 0
+                        && size.width >= previewSize.width && size.height >= previewSize.height) {
+                    float sizeScale = size.width / (float) size.height;
+                    if (sizeScale == previewSizeScale) {
+                        if (fitSize == null) {
+                            fitSize = size;
+                        } else if (size.width >= fitSize.width && size.height >= fitSize.height) {
+                            fitSize = size;
+                        }
+                    }
+                }
+            }
+
+            // 如果没有选出fitSize, 那么最大的Size就是FitSize
+            if (fitSize == null) {
+                fitSize = biggestSize;
+            }
+            mParameters.setPictureSize(fitSize.width, fitSize.height);
+        }
+    }
+
+    /**
+     * 预览界面尺寸
+     */
+    private void setPreviewSize(Camera.Parameters mParameters) {
+        //获取系统支持预览大小
+        List<Camera.Size> localSizes = mParameters.getSupportedPreviewSizes();
+        Camera.Size biggestSize = null;//最大分辨率
+        Camera.Size fitSize = null;// 优先选屏幕分辨率
+        Camera.Size targetSize = null;// 没有屏幕分辨率就取跟屏幕分辨率相近(大)的size
+        Camera.Size targetSiz2 = null;// 没有屏幕分辨率就取跟屏幕分辨率相近(小)的size
+        if (localSizes != null) {
+            int cameraSizeLength = localSizes.size();
+            for (int n = 0; n < cameraSizeLength; n++) {
+                Camera.Size size = localSizes.get(n);
+                Log.d("sssd-系统支持的尺寸:", size.width + "*" + size.height);
+                if (biggestSize == null ||
+                        (size.width >= biggestSize.width && size.height >= biggestSize.height)) {
+                    biggestSize = size;
+                }
+
+                //如果支持的比例都等于所获取到的宽高
+                int screenWidth = surfaceView.getWidth();
+                int screenHeight = surfaceView.getHeight();
+                if (size.width == screenHeight
+                        && size.height == screenWidth) {
+                    fitSize = size;
+                    //如果任一宽或者高等于所支持的尺寸
+                } else {
+                    if (size.width == screenHeight
+                            || size.height == screenWidth) {
+                        if (targetSize == null) {
+                            targetSize = size;
+                            //如果上面条件都不成立 如果任一宽高小于所支持的尺寸
+                        } else if (size.width < screenHeight
+                                || size.height < screenWidth) {
+                            targetSiz2 = size;
+                        }
+                    }
+                }
+            }
+
+            if (fitSize == null) {
+                fitSize = targetSize;
+            }
+
+            if (fitSize == null) {
+                fitSize = targetSiz2;
+            }
+
+            if (fitSize == null) {
+                fitSize = biggestSize;
+            }
+            Log.d("sssd-最佳预览尺寸:", fitSize.width + "*" + fitSize.height);
+            mParameters.setPreviewSize(fitSize.width, fitSize.height);
         }
     }
 
@@ -101,7 +251,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         mCamera.setDisplayOrientation(rotation);
 
         Camera.Parameters parameters = mCamera.getParameters();
-        parameters.setRotation(rotation);
+        parameters.setRotation(isFrontCamera() ? rotation + 180 : rotation);
         mCamera.setParameters(parameters);
     }
 
@@ -143,9 +293,17 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (event.getPointerCount() == 1) {
-            handleFocus(event, mCamera);
+            try {//有的摄像头不支持聚焦
+                handleFocus(event, mCamera);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         return true;
+    }
+
+    public boolean isFrontCamera() {
+        return mCurrentCamId == Camera.CameraInfo.CAMERA_FACING_FRONT;
     }
 
     private void handleFocus(MotionEvent event, Camera camera) {
@@ -218,38 +376,131 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         mCamera.takePicture(null, null, new Camera.PictureCallback() {
             @Override
             public void onPictureTaken(byte[] data, Camera camera) {
-                //回调是在主线程
-                CameraFragment.this.onPictureTaken(data, camera);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Bitmap bitmap;
+                        if (isFrontCamera()) {
+                            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+                            if (pictureFile == null) {
+                                Log.d(TAG, "Error creating media file, check storage permissions");
+                                return;
+                            }
+                            try {
+                                FileOutputStream fos = new FileOutputStream(pictureFile);
+                                fos.write(data);
+                                fos.close();
+
+                            } catch (FileNotFoundException e) {
+                                Log.d(TAG, "File not found: " + e.getMessage());
+                            } catch (IOException e) {
+                                Log.d(TAG, "Error accessing file: " + e.getMessage());
+                            }
+
+                            preview.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    camera.startPreview();
+                                    preview.setVisibility(View.VISIBLE);
+                                    Glide.with(getContext()).load(getOutputMediaFileUri()).into(preview);
+                                }
+                            });
+
+                        } else {
+                            bitmap = getPreview(data);
+                            preview.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    camera.startPreview();
+                                    preview.setVisibility(View.VISIBLE);
+                                    preview.setImageBitmap(bitmap);
+                                }
+                            });
+                            File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
+                            FileOutputStream fos = null;
+                            try {
+                                fos = new FileOutputStream(pictureFile);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                                fos.flush();
+                            } catch (FileNotFoundException e) {
+                                Log.d(TAG, "File not found: " + e.getMessage());
+                            } catch (IOException e) {
+                                Log.d(TAG, "Error accessing file: " + e.getMessage());
+                            } finally {
+                                try {
+                                    if (fos != null) {
+                                        fos.close();
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                }).start();
             }
         });
     }
 
+    @org.jetbrains.annotations.Nullable
+    private Bitmap getPreview(byte[] data) {
 
-    private void onPictureTaken(byte[] data, Camera camera) {
-        File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-        if (pictureFile == null) {
-            Log.d(TAG, "Error creating media file, check storage permissions");
-            return;
-        }
-        FileOutputStream fos = null;
+        ExifInterface ei;
+        Bitmap rotatedBitmap = null;
         try {
-            fos = new FileOutputStream(pictureFile);
-            fos.write(data);
+            ei = new ExifInterface(new ByteArrayInputStream(data));
+            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
+            Bitmap originBmp = BitmapFactory.decodeByteArray(data, 0, data.length);
+            switch (orientation) {
 
-            camera.startPreview();
-        } catch (FileNotFoundException e) {
-            Log.d(TAG, "File not found: " + e.getMessage());
-        } catch (IOException e) {
-            Log.d(TAG, "Error accessing file: " + e.getMessage());
-        } finally {
-            try {
-                if (fos != null) {
-                    fos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = rotateAndCropImage(originBmp, 90);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = rotateAndCropImage(originBmp, 180);
+                    break;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = rotateAndCropImage(originBmp, 270);
+                    break;
+
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    rotatedBitmap = originBmp;
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+        return rotatedBitmap;
+    }
+
+    public Bitmap rotateAndCropImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+
+        matrix.postRotate(angle);
+
+        int srcWidth = source.getWidth();
+        int srcHeight = source.getHeight();
+
+        Log.d(TAG, "bitmap: " + srcWidth + " : " + srcHeight);
+
+//        float ratio = 85.6f / 54;
+//        float height = srcWidth / ratio;
+//        float y = (srcHeight - height) / 2;
+
+        float ratio = 85.6f / 54;
+        float width = srcHeight / ratio;
+        float x = (srcWidth - width) / 2;
+
+        int height = srcHeight;
+        float y = (srcHeight - height) / 2;
+
+        return Bitmap.createBitmap(source, (int) x, (int) y, (int) width, height,
+                matrix, true);
     }
 
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -300,9 +551,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public void onPause() {
         super.onPause();
-        if (mCamera != null) {
-            mCamera.stopPreview();
-        }
         if (mHolder != null) {
             mHolder.removeCallback(this);
         }
@@ -311,9 +559,6 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     @Override
     public void onResume() {
         super.onResume();
-        if (mCamera != null) {
-            mCamera.startPreview();
-        }
         if (mHolder != null) {
             mHolder.addCallback(this);
         }
