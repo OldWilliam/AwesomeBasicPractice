@@ -75,14 +75,14 @@ public class AdvancedViewFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         HeroModel model = new HeroModel();
-        model.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
-            @Override
-            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
-                for (int i = 0; i < beans.size(); i++) {
-                    Log.d(TAG, "onResult: " + beans.get(i).name);
-                }
-            }
-        });
+//        model.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
+//            @Override
+//            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
+//                for (int i = 0; i < beans.size(); i++) {
+//                    Log.d(TAG, "onResult: " + beans.get(i).name);
+//                }
+//            }
+//        });
     }
 }
 

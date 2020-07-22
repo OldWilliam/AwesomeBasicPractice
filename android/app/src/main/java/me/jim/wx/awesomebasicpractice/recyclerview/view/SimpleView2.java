@@ -47,18 +47,18 @@ public class SimpleView2 extends LinearLayout {
         mLayout = new HexagonLayoutManager();
         recyclerView.setLayoutManager(mLayout);
 
-        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
-            @Override
-            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
-                SimpleView2.this.data = beans;
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
-            }
-        });
+//        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
+//            @Override
+//            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
+//                SimpleView2.this.data = beans;
+//                post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mAdapter.notifyDataSetChanged();
+//                    }
+//                });
+//            }
+//        });
 
         findViewById(R.id.btn_simple).setOnClickListener(new OnClickListener() {
             @Override

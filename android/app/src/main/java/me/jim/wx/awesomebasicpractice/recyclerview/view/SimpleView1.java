@@ -61,19 +61,19 @@ public class SimpleView1 extends LinearLayout {
     }
 
     private void fetchData() {
-        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
-            @Override
-            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
-                datas = beans;
-                post(new Runnable() {
-                    @Override
-                    public void run() {
-                        datas.get(1).name = "卫鑫";
-                        mAdapter.notifyItemChanged(1);
-                    }
-                });
-            }
-        });
+//        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
+//            @Override
+//            public void onResult(List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> beans) {
+//                datas = beans;
+//                post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        datas.get(1).name = "卫鑫";
+//                        mAdapter.notifyItemChanged(1);
+//                    }
+//                });
+//            }
+//        });
     }
 
     private class MyAdapter extends RecyclerView.Adapter<MyItemHolder> {

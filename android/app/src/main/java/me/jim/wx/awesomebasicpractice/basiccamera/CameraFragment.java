@@ -281,10 +281,12 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
     }
 
     private void releaseCamera() {
-        mCamera.setPreviewCallback(null);
-        mCamera.stopPreview();
-        mCamera.release();
-        mCamera = null;
+        if (mCamera != null) {
+            mCamera.setPreviewCallback(null);
+            mCamera.stopPreview();
+            mCamera.release();
+            mCamera = null;
+        }
     }
 
     public int getDisplayOrientation() {

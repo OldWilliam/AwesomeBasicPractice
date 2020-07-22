@@ -80,7 +80,7 @@ public class PrimaryViewFragment extends Fragment {
         /*hook 测试*/
         initHookView(view);
         /*GLSurfaceView*/
-        initGlView(view);
+//        initGlView(view);
         /*抛物线动画*/
 //        initParabolaAnim(view);
         /*自由落体小球*/

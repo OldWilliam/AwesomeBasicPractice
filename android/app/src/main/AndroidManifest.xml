@@ -27,6 +27,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="me.jim.wx.awesomebasicpractice.basiccamera.CameraActivity"/>
+
     </application>
     <!--开启摄像头需要的权限-->
     <uses-feature android:name="android.hardware.camera2.full" />

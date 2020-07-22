@@ -64,17 +64,17 @@ public class GraphicFragment extends Fragment {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(160, 160);
         params.gravity = Gravity.CENTER;
         ll.addView(imageView, params);
-        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
-            @Override
-            public void onResult(final List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> itemInfoBeans) {
-                Runnable runnable = new Runnable() {
-                    public void run() {
-                        Glide.with(getContext()).load(itemInfoBeans.get(0).image_url).into(imageView);
-                    }
-                };
-                imageView.post(runnable);
-            }
-        });
+//        HeroModel.getHeros(new ResponseListener<List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean>>() {
+//            @Override
+//            public void onResult(final List<BaseHeroBean.AllHerosBean.AllHeroBean.ItemInfoBean> itemInfoBeans) {
+//                Runnable runnable = new Runnable() {
+//                    public void run() {
+//                        Glide.with(getContext()).load(itemInfoBeans.get(0).image_url).into(imageView);
+//                    }
+//                };
+//                imageView.post(runnable);
+//            }
+//        });
 
         rvDrawable = view.findViewById(R.id.rv_drawable);
         rvDrawable.setLayoutManager(new LinearLayoutManager(getContext()));
