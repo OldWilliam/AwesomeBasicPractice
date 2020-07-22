@@ -8,9 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
 
 import me.jim.wx.FragmentBinder;
-import me.jim.wx.awesomebasicpractice.util.Utils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Utils.setFullscreen(this);
+        setFullscreen();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -35,6 +36,27 @@ public class MainActivity extends AppCompatActivity
                 findViewById(R.id.drawer_layout));
 
 
+    }
+
+    public void setFullscreen() {
+
+            int uiFlags = 0; // hide status bar
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                uiFlags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        //                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        //                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            }
+            if (android.os.Build.VERSION.SDK_INT >= 19) {
+                uiFlags |= 0x00001000;    //SYSTEM_UI_FLAG_IMMERSIVE_STICKY: hide navigation bars - compatibility: building API level is lower thatn 19, use magic number directly for higher API target level
+            } else {
+                uiFlags |= View.SYSTEM_UI_FLAG_LOW_PROFILE;
+            }
+            getWindow().getDecorView().setSystemUiVisibility(uiFlags);
+
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏s
     }
 
     private SparseArray<Fragment> fragments = new SparseArray<>();
