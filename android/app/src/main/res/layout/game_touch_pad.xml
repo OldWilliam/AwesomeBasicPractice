@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="140dp"
+    android:layout_height="140dp">
+
+
+    <ImageView
+        android:id="@+id/touch_area"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ml_penguin_game_joystickbg" />
+
+    <ImageView
+        android:id="@+id/top_sector"
+        android:layout_width="73dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-5dp"
+        android:rotation="180"
+        android:src="@drawable/ml_penguin_game_joystickbg_sector"
+        android:visibility="invisible" />
+
+
+    <ImageView
+        android:id="@+id/bottom_sector"
+        android:layout_width="73dp"
+        android:layout_height="37dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="-5dp"
+        android:src="@drawable/ml_penguin_game_joystickbg_sector"
+        android:visibility="invisible" />
+
+
+    <ImageView
+        android:id="@+id/top_light_arrow"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-6dp"
+        android:rotation="180"
+        android:src="@drawable/ml_penguin_game_joystickbg_arrow_pre"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/top_arrow"
+        android:layout_width="18dp"
+        android:layout_height="11dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        android:rotation="180"
+        android:src="@drawable/ml_penguin_game_joystickbg_arrow" />
+
+    <ImageView
+        android:id="@+id/bottom_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="11dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="6dp"
+        android:src="@drawable/ml_penguin_game_joystickbg_arrow" />
+
+    <ImageView
+        android:id="@+id/bottom_light_arrow"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="-6dp"
+        android:src="@drawable/ml_penguin_game_joystickbg_arrow_pre"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/ball_img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ml_penguin_game_joystick_ball" />
+
+
+    <TextView
+        android:id="@+id/touch_ball"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="6dp" />
+
+    <LinearLayout
+        android:id="@+id/info_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="当前不在您的轮次"
+            android:textColor="#ccffffff"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/line_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_horizontal"
+            android:text="正在排队"
+            android:textColor="#ccffffff"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

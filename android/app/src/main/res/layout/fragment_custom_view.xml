@@ -11,6 +11,10 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.widget.GameTouchPad
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <me.jim.wx.awesomebasicpractice.widget.Gallery
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
