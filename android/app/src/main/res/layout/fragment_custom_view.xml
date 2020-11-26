@@ -11,6 +11,14 @@
         android:background="@android:color/transparent"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.view.HearShapeFlash
+            android:layout_width="75dp"
+            android:background="@android:color/darker_gray"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="75dp">
+
+        </me.jim.wx.awesomebasicpractice.view.HearShapeFlash>
+
         <me.jim.wx.awesomebasicpractice.widget.GameTouchPad
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
