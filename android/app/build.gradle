@@ -79,6 +79,8 @@ dependencies {
     //Fragment Bind Automatically
     annotationProcessor project(path: ':FragmentProcessor')
     implementation project(path: ':FragmentProcessor')
+    //svga
+    implementation 'com.github.yyued:SVGAPlayer-Android:2.3.0'
 }
 repositories {
     mavenCentral()

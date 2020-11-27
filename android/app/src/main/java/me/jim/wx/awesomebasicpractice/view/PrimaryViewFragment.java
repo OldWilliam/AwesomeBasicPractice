@@ -34,6 +34,15 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opensource.svgaplayer.SVGADrawable;
+import com.opensource.svgaplayer.SVGAImageView;
+import com.opensource.svgaplayer.SVGAParser;
+import com.opensource.svgaplayer.SVGAVideoEntity;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.CountDownLatch;
 
 import me.jim.wx.awesomebasicpractice.R;
@@ -85,6 +94,52 @@ public class PrimaryViewFragment extends Fragment {
 //        initParabolaAnim(view);
         /*自由落体小球*/
         initFreeFallBall(view);
+
+        try {
+            startSVGA("heart_flow.svga", view.findViewById(R.id.heart_anim));
+
+            startSVGA("https://s.momocdn.com/w/u/others/2020/11/24/1606199551971-ml_fly_heart.svga", view.findViewById(R.id.fly));
+            startSVGA("https://s.momocdn.com/w/u/others/2020/11/24/1606199551976-ml_white_particle.svga", view.findViewById(R.id.particle));
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startSVGA(String assetsName, SVGAImageView svgaImageView) throws MalformedURLException {
+        SVGAParser svgaParser = new SVGAParser(getContext());
+        if (assetsName.startsWith("http")) {
+            svgaParser.parse(new URL(assetsName), new SVGAParser.ParseCompletion() {
+                @Override
+                public void onComplete(@NotNull SVGAVideoEntity svgaVideoEntity) {
+                    SVGADrawable svgaDrawable = new SVGADrawable(svgaVideoEntity);
+                    SVGAImageView viewById = svgaImageView;
+                    viewById.setImageDrawable(svgaDrawable);
+                    viewById.setLoops(0);
+                    viewById.startAnimation();
+                }
+
+                @Override
+                public void onError() {
+
+                }
+            });
+            return;
+        }
+        svgaParser.parse(assetsName, new SVGAParser.ParseCompletion() {
+            @Override
+            public void onComplete(@NotNull SVGAVideoEntity svgaVideoEntity) {
+                SVGADrawable svgaDrawable = new SVGADrawable(svgaVideoEntity);
+                SVGAImageView viewById = svgaImageView;
+                viewById.setImageDrawable(svgaDrawable);
+                viewById.setLoops(0);
+                viewById.startAnimation();
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     private void initFreeFallBall(final View view) {
