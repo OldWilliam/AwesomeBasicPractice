@@ -11,6 +11,12 @@
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.widget.heart.HeartProgressView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:background="@android:color/white" />
+
         <FrameLayout
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -19,8 +25,8 @@
             <com.opensource.svgaplayer.SVGAImageView
                 android:id="@+id/heart_anim"
                 android:layout_width="75dp"
-                android:layout_gravity="center"
-                android:layout_height="75dp" />
+                android:layout_height="75dp"
+                android:layout_gravity="center" />
 
             <com.opensource.svgaplayer.SVGAImageView
                 android:id="@+id/particle"
