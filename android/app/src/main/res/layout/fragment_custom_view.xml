@@ -11,6 +11,12 @@
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
 
+        <me.jim.wx.awesomebasicpractice.widget.CustomLinearTimerView
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_linear_timer" />
+
         <me.jim.wx.awesomebasicpractice.widget.heart.HeartProgressView
             android:layout_width="match_parent"
             android:layout_height="120dp"
