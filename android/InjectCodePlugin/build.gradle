@@ -9,6 +9,8 @@ dependencies {
     compile localGroovy()
     compile 'com.android.tools.build:gradle:2.3.3'
     compile "net.bytebuddy:byte-buddy:1.7.9"
+
+    compile 'org.javassist:javassist:3.28.0-GA'
 }
 
 repositories {

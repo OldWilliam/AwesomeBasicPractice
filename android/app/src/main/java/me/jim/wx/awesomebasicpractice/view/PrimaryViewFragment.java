@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.graphic.QuestionMarkDrawable;
+import me.jim.wx.awesomebasicpractice.other.bytecode.biz.Application;
 import me.jim.wx.awesomebasicpractice.other.hook.HookHelper;
 import me.jim.wx.awesomebasicpractice.view.primary.FlowLayout;
 
@@ -45,6 +46,7 @@ public class PrimaryViewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_custom_view, container, false);
     }
 
@@ -68,6 +70,10 @@ public class PrimaryViewFragment extends Fragment {
         initDrawableView(view);
         /*hook 测试*/
         initHookView(view);
+
+
+        Application application = new Application();
+        application.process();
     }
 
     private void initHookView(View view) {

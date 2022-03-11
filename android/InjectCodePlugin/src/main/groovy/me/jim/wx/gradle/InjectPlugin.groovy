@@ -3,17 +3,13 @@
  */
 package me.jim.wx.gradle
 
-import com.android.build.api.transform.DirectoryInput
-import com.android.build.api.transform.Format
-import com.android.build.api.transform.JarInput
-import com.android.build.api.transform.QualifiedContent
-import com.android.build.api.transform.Transform
-import com.android.build.api.transform.TransformException
-import com.android.build.api.transform.TransformInput
-import com.android.build.api.transform.TransformInvocation
+import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
+import javassist.ClassPool
+import javassist.CtClass
 import me.jim.wx.gradle.digest.DigestUtils
+import me.jim.wx.javamodule.asm.MyClassVisitor
 import net.bytebuddy.jar.asm.ClassReader
 import net.bytebuddy.jar.asm.ClassVisitor
 import net.bytebuddy.jar.asm.ClassWriter
@@ -67,16 +63,32 @@ class InjectPlugin extends Transform implements Plugin<Project> {
                                 !"R.class".equals(name) && !"BuildConfig.class".equals(name)) {
                             println name + "is changing..."
 
-                            ClassReader cr = new ClassReader(file.bytes)
-                            ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
-                            ClassVisitor cv = new InjectClassVisitor(cw) //asm
+                            def s = file.parentFile.getAbsolutePath() + File.separator + name
 
-                            cr.accept(cv, ClassReader.EXPAND_FRAMES)
+                            ClassPool cp = ClassPool.getDefault();
+                            CtClass ctClass = cp.makeClass(file.newInputStream());
 
-                            def code = cw.toByteArray()
+                            String oldName = "android.app.Activity";
+                            String newName = "me.jim.wx.awesomebasicpractice.other.bytecode.biz.ShadowActivity";
+                            if (!ctClass.hasAnnotation("android.support.annotation.Keep")) {
+                                ctClass.replaceClassName(oldName, newName);
+                            }
+                            def code = ctClass.toBytecode();
+                            ctClass.defrost();
 
-                            FileOutputStream fos = new FileOutputStream(
-                                    file.parentFile.getAbsolutePath() + File.separator + name)
+
+                            ClassReader cr = new ClassReader(code)
+                            println "asm" + cr.getClassName()
+                            if (cr.getClassName() == "me/jim/wx/awesomebasicpractice/other/bytecode/biz/Application") {
+                                ClassWriter cw = new ClassWriter(cr, ClassWriter.COMPUTE_MAXS)
+                                ClassVisitor cv = new MyClassVisitor(cw) //asm
+
+                                cr.accept(cv, ClassReader.EXPAND_FRAMES)
+
+                                code = cw.toByteArray()
+
+                            }
+                            FileOutputStream fos = new FileOutputStream(s)
                             fos.write(code)
                             fos.close()
                         }
