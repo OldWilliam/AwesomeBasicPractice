@@ -19,7 +19,7 @@ public class Application {
     @KeepForShadow
     public void test(String a, int s, Activity activity) {
         IThirdPart thirdPartLib = createLib();
-        thirdPartLib.bindActivity(activity);
+        thirdPartLib.bindActivity("4",activity, 1);
         Object var7 = null;
     }
 
@@ -30,6 +30,6 @@ public class Application {
     public void test2() {
         ThirdPartLib thirdPartLib = createLib();
         Activity activity = AppManager.getActivity();
-        thirdPartLib.bindActivity(activity);
+        thirdPartLib.bindActivity("4", activity, 1);
     }
 }

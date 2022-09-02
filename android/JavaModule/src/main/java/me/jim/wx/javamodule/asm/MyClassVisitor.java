@@ -1,6 +1,7 @@
 package me.jim.wx.javamodule.asm;
 
 import net.bytebuddy.jar.asm.ClassVisitor;
+import net.bytebuddy.jar.asm.Label;
 import net.bytebuddy.jar.asm.MethodVisitor;
 import net.bytebuddy.jar.asm.Opcodes;
 
@@ -19,6 +20,8 @@ public class MyClassVisitor extends ClassVisitor {
         return methodVisitor;
     }
 
+
+
     private class MyMethodVisitor extends MethodVisitor {
         public MyMethodVisitor(int api, MethodVisitor methodVisitor, int access, String name, String desc, String signature, String[] exceptions) {
             super(api, methodVisitor);
@@ -29,10 +32,31 @@ public class MyClassVisitor extends ClassVisitor {
             System.out.println(owner + " " + name + " " + desc);
 
             if (desc.equals("(Lme/jim/wx/javamodule/javassist/biz/ShadowActivity;)V")) {
+                super.visitMethodInsn(Opcodes.INVOKESTATIC, "main/java/me/jim/wx/javamodule/javassist/biz/AppManager", "getActivity", "()Lmain/java/me/jim/wx/javamodule/javassist/biz/Activity;", false);
                 desc = "(Lme/jim/wx/javamodule/javassist/biz/Activity;)V";
             }
-
             super.visitMethodInsn(opcode, owner, name, desc, itf);
+        }
+
+        @Override
+        public void visitVarInsn(int opcode, int var) {
+            super.visitVarInsn(opcode, var);
+        }
+
+        @Override
+        public void visitLabel(Label label) {
+            super.visitLabel(label);
+        }
+
+        @Override
+        public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index) {
+            super.visitLocalVariable(name, desc, signature, start, end, index);
+        }
+
+        @Override
+        public void visitLdcInsn(Object cst) {
+            System.out.println(cst);
+            super.visitLdcInsn(cst);
         }
     }
 }
