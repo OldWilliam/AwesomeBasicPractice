@@ -3,7 +3,7 @@ package me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager;
 import android.annotation.SuppressLint;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;

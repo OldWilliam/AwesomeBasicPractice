@@ -3,11 +3,11 @@ package me.jim.wx.awesomebasicpractice.graphic;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
@@ -21,8 +21,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-
 import org.xml.sax.XMLReader;
 
 import java.lang.reflect.Field;
@@ -32,9 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.http.ResponseListener;
-import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
-import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
 import me.jim.wx.fragmentannotation.AttachFragment;
 

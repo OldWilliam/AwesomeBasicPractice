@@ -6,6 +6,8 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.2.1'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlin_coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlin_coroutines_version"
     api "com.android.tools.build:gradle:7.0.3"
     api "com.android.tools:common:30.0.3"
     api 'org.javassist:javassist:3.28.0-GA'

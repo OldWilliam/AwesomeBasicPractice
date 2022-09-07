@@ -1,9 +1,9 @@
 package me.jim.wx.awesomebasicpractice.recyclerview.view;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.http.ResponseListener;
 import me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager.ABC1LayoutManager;
 import me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager.HexagonLayoutManager;
 import me.jim.wx.awesomebasicpractice.view.primary.HexagonImageView;
 import me.jim.wx.awesomebasicpractice.recyclerview.layoutmanager.ABCLayoutManager;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
-import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 
 /**
  * Created by wx on 2018/1/3.
