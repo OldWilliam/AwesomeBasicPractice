@@ -3,6 +3,7 @@ package me.jim.wx.awesomebasicpractice;
 import android.app.Application;
 import android.content.Context;
 
+import me.jim.wx.awesomebasicpractice.other.di.KoinConfigKt;
 import me.jim.wx.awesomebasicpractice.util.ContextHelper;
 
 
@@ -18,6 +19,7 @@ public class BasicApplication extends Application{
         super.onCreate();
         ContextHelper.init(this);
 //        BlockCanary.install(this, new BlockCanaryContext()).start();
+        KoinConfigKt.initKoin();
     }
 
     @Override

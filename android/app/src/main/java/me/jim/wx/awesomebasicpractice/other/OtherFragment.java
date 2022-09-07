@@ -10,9 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import org.koin.core.context.KoinContextHandler;
+
+import java.util.Collections;
+
 import me.jim.wx.awesomebasicpractice.R;
 import me.jim.wx.awesomebasicpractice.other.annotation.AnnotationManager;
 import me.jim.wx.awesomebasicpractice.other.di.DiApplication;
+import me.jim.wx.awesomebasicpractice.other.di.HelloDIKt;
 import me.jim.wx.fragmentannotation.AttachFragment;
 
 /**
@@ -24,12 +29,14 @@ public class OtherFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        KoinContextHandler.INSTANCE.get().loadModules(Collections.singletonList(HelloDIKt.getHelloModule()));
         new DiApplication().sayHello();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        KoinContextHandler.INSTANCE.get().unloadModules(Collections.singletonList(HelloDIKt.getHelloModule()));
     }
 
     @Override
