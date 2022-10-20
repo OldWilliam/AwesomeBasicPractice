@@ -11,7 +11,7 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -21,7 +21,7 @@ import android.view.View;
  * 三角形的View，可以让图片显示成三角形
  */
 
-public class TriangleView extends android.support.v7.widget.AppCompatImageView {
+public class TriangleView extends androidx.appcompat.widget.AppCompatImageView {
     public TriangleView(Context context) {
         super(context);
         initView();

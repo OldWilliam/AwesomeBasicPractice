@@ -1,10 +1,10 @@
 package me.jim.wx.awesomebasicpractice.jetpack;
 
 import android.app.Activity;
-import android.arch.lifecycle.ViewModel;
-import android.databinding.ObservableField;
+import androidx.lifecycle.ViewModel;
+import androidx.databinding.ObservableField;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;

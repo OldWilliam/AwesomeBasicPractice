@@ -17,7 +17,6 @@ public class BasicApplication extends Application{
     public void onCreate() {
         super.onCreate();
         ContextHelper.init(this);
-//        BlockCanary.install(this, new BlockCanaryContext()).start();
     }
 
     @Override

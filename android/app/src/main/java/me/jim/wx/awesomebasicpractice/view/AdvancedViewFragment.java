@@ -2,18 +2,14 @@ package me.jim.wx.awesomebasicpractice.view;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.List;
-
 import me.jim.wx.awesomebasicpractice.R;
-import me.jim.wx.awesomebasicpractice.http.ResponseListener;
-import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.BaseHeroBean;
 import me.jim.wx.awesomebasicpractice.recyclerview.model.hero.HeroModel;
 
 /**
