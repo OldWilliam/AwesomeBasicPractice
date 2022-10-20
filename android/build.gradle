@@ -71,3 +71,11 @@ task startApp(type: Exec){
         commandLine "$adb", 'shell', 'am', 'start', '-n', "$launcherActivity"
     }
 }
+
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint" << "-verbose" << "-XprintRounds" << "-XprintProcessorInfo" << "-Xmaxerrs" << "100000"
+        }
+    }
+}

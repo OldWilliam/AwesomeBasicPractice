@@ -22,13 +22,18 @@ import javax.lang.model.element.Modifier;
 import javax.lang.model.element.Name;
 import javax.lang.model.element.TypeElement;
 
-import me.jim.wx.FragmentBinder;
 import me.jim.wx.fragmentannotation.AttachFragment;
 
 
 @SuppressWarnings("unused")
 @AutoService(Processor.class)
 public class FragmentProcessor extends AbstractProcessor {
+
+
+    public FragmentProcessor() {
+        System.out.println("TestAnnotationProcessor constrator");
+    }
+
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
 
@@ -55,14 +60,14 @@ public class FragmentProcessor extends AbstractProcessor {
             }
         }
 
-        TypeSpec typeSpec = TypeSpec.classBuilder(FragmentBinder.FRAGMENT_BINDER_IMPL)
+        TypeSpec typeSpec = TypeSpec.classBuilder("FragmentBinderImpl")
                 .addModifiers(Modifier.PUBLIC)
                 .addField(nameField)
                 .addField(fragField)
                 .addStaticBlock(blockBuilder.build())
                 .build();
 
-        JavaFile javaFile = JavaFile.builder(FragmentBinder.ME_JIM_WX, typeSpec)
+        JavaFile javaFile = JavaFile.builder("me.jim.wx", typeSpec)
                 .build();
 
         try {

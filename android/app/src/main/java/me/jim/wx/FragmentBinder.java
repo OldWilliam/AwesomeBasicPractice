@@ -11,8 +11,6 @@ import java.util.List;
  */
 public class FragmentBinder {
     private static final FragmentBinder ourInstance = new FragmentBinder();
-    public static final String FRAGMENT_BINDER_IMPL = "FragmentBinderImpl";
-    public static final String ME_JIM_WX = "me.jim.wx";
 
     private ArrayList names;
     private ArrayList frags;
@@ -23,7 +21,7 @@ public class FragmentBinder {
 
     private FragmentBinder() {
         try {
-            Class<?> clazz = Class.forName(ME_JIM_WX.concat(".").concat(FRAGMENT_BINDER_IMPL));
+            Class<?> clazz = Class.forName("me.jim.wx".concat(".").concat("FragmentBinderImpl"));
             Object o = clazz.newInstance();
 
             Field namesField = clazz.getDeclaredField("names");

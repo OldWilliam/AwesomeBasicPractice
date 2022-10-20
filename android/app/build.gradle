@@ -1,10 +1,11 @@
 apply plugin: 'com.android.application'
+
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 32
-    buildToolsVersion "29.0.3"
 
     namespace 'me.jim.wx.awesomebasicpractice'
 
@@ -19,7 +20,14 @@ android {
             abiFilters "armeabi-v7a"
         }
         multiDexEnabled true
+
+        kapt {
+            showProcessorStats = true
+        }
     }
+
+
+
     buildTypes {
         release {
             minifyEnabled false
@@ -78,7 +86,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     //glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
     //suport
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.appcompat:appcompat:1.0.0'
@@ -92,8 +100,8 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     //Fragment Bind Automatically
-    annotationProcessor project(path: ':FragmentProcessor')
     implementation project(path: ':FragmentProcessor')
+    kapt project(path: ':FragmentProcessor')
     //svga
     implementation 'com.github.yyued:SVGAPlayer-Android:2.3.0'
 
