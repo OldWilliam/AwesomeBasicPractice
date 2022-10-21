@@ -58,7 +58,7 @@ public class RxJavaFragment extends Fragment {
                     public void accept(String s) throws Exception {
                         Context context = getContext();
                         if (context != null) {
-                            Toast.makeText(null, s, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
