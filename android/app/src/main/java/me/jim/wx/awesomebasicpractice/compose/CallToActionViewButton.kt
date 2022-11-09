@@ -12,7 +12,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.AbstractComposeView
-import com.google.android.material.composethemeadapter.MdcTheme
+import androidx.compose.ui.tooling.preview.Preview
+import com.google.accompanist.appcompattheme.AppCompatTheme
 
 class CallToActionViewButton @JvmOverloads constructor(
     context: Context,
@@ -21,11 +22,13 @@ class CallToActionViewButton @JvmOverloads constructor(
 ) : AbstractComposeView(context, attrs, defStyle) {
 
     var text by mutableStateOf<String>("Hello Compose")
-    var onClick by mutableStateOf<() -> Unit>({})
+    var onClick by mutableStateOf<() -> Unit>({
+
+    })
 
     @Composable
     override fun Content() {
-        MdcTheme {
+        AppCompatTheme {
             CallToActionButton(text, onClick)
         }
     }
@@ -46,5 +49,4 @@ class CallToActionViewButton @JvmOverloads constructor(
             Text(text)
         }
     }
-
 }
